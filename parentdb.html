@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The New Normal for Tutorials</title>
+    <title>AKADS Parent Dashboard</title>
     <meta name="description" content="AKADS Online Tutoring Website">
     <meta name="keywords" content="akads, AKADS, akadsph, AKADSPH, tutoring, tutorial, online, tutor, tutee, parent, booking">
     <link rel='icon' href='images/akadslogo.png' type='image/x-icon'/ >
@@ -27,7 +27,8 @@
         
         <ul class="navbar-nav px-3">
           <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
+            <!-- <a class="nav-link" href="#">Sign out</a> -->
+            <a class="btn btn-sm btn-outline-light" href="#" role="button">Sign Out</a>
           </li>
         </ul>
       </nav>
@@ -40,37 +41,33 @@
                 <ul class="nav flex-column">
                     <li class="nav-item">
                     <a class="nav-link active" href="#">
-                        <span data-feather="home"></span>
-                        Dashboard <span class="sr-only">(current)</span>
+                        <i class="fas fa-home"></i>
+                        Parent Dashboard <span class="sr-only">(current)</span>
                     </a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="findtutor.html">
-                        <span data-feather="file"></span>
+                        <i class="fas fa-search"></i>
                         Find a Tutor
                     </a>
                     </li>
                     <li class="nav-item">
-                    <a class="nav-link" href="#">
-                        <span data-feather="users"></span>
-                        Overview
-                    </a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <span data-feather="bar-chart-2"></span>
+                        <i class="fas fa-arrow-up"></i>
                         Upcoming Sessions
                     </a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <span data-feather="bar-chart-2"></span>
+                        <i class="fas fa-arrow-down"></i>
                         Past Sessions
                     </a>
                     </li>
                     <li class="nav-item">
                     <a class="nav-link" href="#">
-                        <span data-feather="layers"></span>
+                        <i class="fas fa-cog"></i>
                         Settings
                     </a>
                     </li>
@@ -84,7 +81,7 @@
                     <h1 class="h2">Dashboard</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
                       <!-- <button type="button" class="btn btn-lg btn-outline-primary">BOOK A TUTOR</button> -->
-                      <a class="btn btn-lg btn-outline-primary" href="findtutor.html" role="button">BOOK A TUTOR</a>
+                      <a class="btn btn-lg btn-info" href="findtutor.html" role="button"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</a>
                     </div>
                 </div>
                 <h2>Upcoming Sessions</h2>
@@ -97,6 +94,7 @@
                         <th>Tutor</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -106,6 +104,7 @@
                         <td>ipsum</td>
                         <td>dolor</td>
                         <td>sit</td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
                         </tr>
                         <tr>
                         <td>1,002</td>
@@ -113,6 +112,7 @@
                         <td>consectetur</td>
                         <td>adipiscing</td>
                         <td>elit</td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
                         </tr>
                         <tr>
                         <td>1,003</td>
@@ -120,6 +120,7 @@
                         <td>nec</td>
                         <td>odio</td>
                         <td>Praesent</td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
                         </tr>
                     </tbody>
                     </table>
@@ -135,6 +136,7 @@
                         <th>Tutor</th>
                         <th>Date</th>
                         <th>Time</th>
+                        <th>Details</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -144,6 +146,7 @@
                         <td>ipsum</td>
                         <td>dolor</td>
                         <td>sit</td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
                         </tr>
                         <tr>
                         <td>1,002</td>
@@ -151,6 +154,7 @@
                         <td>consectetur</td>
                         <td>adipiscing</td>
                         <td>elit</td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
                         </tr>
                         <tr>
                         <td>1,003</td>
@@ -158,10 +162,31 @@
                         <td>nec</td>
                         <td>odio</td>
                         <td>Praesent</td>
+                        <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
                         </tr>
                     </tbody>
                     </table>
                 </div>
+
+                <div class="modal fade" id="viewDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Session Details</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
             </main>
 
         </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The New Normal for Tutorials</title>
+    <title>AKADS Parent Dashboard</title>
     <meta name="description" content="AKADS Online Tutoring Website">
     <meta name="keywords" content="akads, AKADS, akadsph, AKADSPH, tutoring, tutorial, online, tutor, tutee, parent, booking">
     <link rel='icon' href='images/akadslogo.png' type='image/x-icon'/ >
@@ -20,69 +20,67 @@
 <body>
     <!-- Navigation Bar -->
     <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
-      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Company name</a>
+      <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"><img src="images/akadsWhiteWeb.png" alt="akadstextlogo" height="35" width="100"></a>
       <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       
       <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-          <a class="nav-link" href="#">Sign out</a>
+          <!-- <a class="nav-link" href="#">Sign out</a> -->
+          <a class="btn btn-sm btn-outline-light" href="#" role="button">Sign Out</a>
         </li>
       </ul>
     </nav>
-    
-    <div class="container-fluid">
+  
+  <div class="container-fluid">
       <div class="row">
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-          <div class="sidebar-sticky pt-3">
-            <ul class="nav flex-column">
-              <li class="nav-item">
-                <a class="nav-link active" href="#">
-                  <span data-feather="home"></span>
-                  Dashboard <span class="sr-only">(current)</span>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="parentdb.html">
-                  <span data-feather="file"></span>
-                  Overview
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="users"></span>
-                  Find a Tutor
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="parentdb.html">
-                  <span data-feather="bar-chart-2"></span>
-                  Upcoming Sessions
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="parentdb.html">
-                  <span data-feather="bar-chart-2"></span>
-                  Past Sessions
-                </a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">
-                  <span data-feather="layers"></span>
-                  Settings
-                </a>
-              </li>
-            </ul>
-          </div>
-        </nav>
+          <!-- Side Navigation Bar -->
+          <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+              <div class="sidebar-sticky pt-3">
+              <ul class="nav flex-column">
+                  <li class="nav-item">
+                  <a class="nav-link" href="parentdb.html">
+                      <i class="fas fa-home"></i>
+                      Parent Dashboard <span class="sr-only">(current)</span>
+                  </a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link active" href="findtutor.html">
+                      <i class="fas fa-search"></i>
+                      Find a Tutor
+                  </a>
+                  </li>
+                  <li class="nav-item">
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="parentdb.html">
+                      <i class="fas fa-arrow-up"></i>
+                      Upcoming Sessions
+                  </a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="parentdb.html">
+                      <i class="fas fa-arrow-down"></i>
+                      Past Sessions
+                  </a>
+                  </li>
+                  <li class="nav-item">
+                  <a class="nav-link" href="#">
+                      <i class="fas fa-cog"></i>
+                      Settings
+                  </a>
+                  </li>
+              </ul>
+              </div>
+          </nav>
 
             <!-- Dashboard -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Dashboard</h1>
+                    <h1 class="h2">Booking Form</h1>
                     <div class="btn-toolbar mb-2 mb-md-0">
-                      <button type="button" class="btn btn-lg btn-outline-primary">BOOK A TUTOR</button>
+                      <button type="button" class="btn btn-lg btn-info"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</button>
                     </div>
                 </div>
                 
@@ -136,9 +134,33 @@
                       <textarea class="form-control" aria-label="With textarea"></textarea>
                     </div>
                     <div>
-                      <button type="submit" class="btn btn-primary">Submit</button>
+                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitBooking">Submit</button>
                     </div>
-                      
+                    <!-- Modal -->
+                    <div class="modal fade" id="submitBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Booking Received.</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            ...
+                            <!-- <p>Your booking has been received.</p>
+                            <p>We will notify you once a tutor has accepted your request.</p>
+                            <p>Thank you for booking with AKADS!</p>
+                            <p>The New Normal for Tutorials.</p> -->
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    
                   </form>
             </main>
 
