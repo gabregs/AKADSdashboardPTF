@@ -23,84 +23,87 @@
         <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"><img src="images/akadsWhiteWeb.png" alt="akadstextlogo" height="35" width="100"></a>
         <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <ul class="navbar-nav px-3">
+        </button>
+        
+        <ul class="navbar-nav px-3">
           <li class="nav-item text-nowrap">
-            <a class="nav-link" href="#">Sign out</a>
-        </li>
-    </ul>
-</nav>
-
-<div class="container-fluid">
-    <div class="row">
-        <!-- Side Navigation Bar -->
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="sidebar-sticky pt-3">
+            <!-- <a class="nav-link" href="#">Sign out</a> -->
+            <a class="btn btn-sm btn-outline-light" href="#" role="button">Sign Out</a>
+          </li>
+        </ul>
+      </nav>
+    
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Side Navigation Bar -->
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+                <div class="sidebar-sticky pt-3">
                 <ul class="nav flex-column">
                     <li class="nav-item">
-                        <a class="nav-link active" href="#">
-                            <span data-feather="home"></span>
-                            Dashboard <span class="sr-only">(current)</span>
-                        </a>
+                    <a class="nav-link" href="parentdb.html">
+                        <i class="fas fa-home"></i>
+                        Parent Dashboard <span class="sr-only">(current)</span>
+                    </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="findtutor.html">
-                            <span data-feather="file"></span>
-                            Find a Tutor
-                        </a>
+                    <a class="nav-link" href="findtutor.html">
+                        <i class="fas fa-search"></i>
+                        Find a Tutor
+                    </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="users"></span>
-                            Overview
-                        </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="bar-chart-2"></span>
-                            Upcoming Sessions
-                        </a>
+                    <a class="nav-link" href="parentdb.html">
+                        <i class="fas fa-arrow-up"></i>
+                        Upcoming Sessions
+                    </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">
-                            <span data-feather="bar-chart-2"></span>
-                            Past Sessions
-                        </a>
+                    <a class="nav-link" href="parentdb.html">
+                        <i class="fas fa-arrow-down"></i>
+                        Past Sessions
+                    </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="pdbsettings.html">
-                            <span data-feather="layers"></span>
-                            Settings
-                        </a>
+                    <a class="nav-link active" href="pdbsettings.html">
+                        <i class="fas fa-cog"></i>
+                        Settings
+                    </a>
                     </li>
                 </ul>
-            </div>
-        </nav>
+                </div>
+            </nav>
 
         <!-- Settings -->
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                <h1 class="h2">Settings</h1>
+                <h2>Settings</h2>
+                <div class="btn-toolbar mb-2 mb-md-0">
+                    <!-- <button type="button" class="btn btn-lg btn-outline-primary">BOOK A TUTOR</button> -->
+                    <a class="btn btn-lg btn-info" href="findtutor.html" role="button"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</a>
+                </div>
             </div>
             <div class="col" id="account">
-                <h2>Account <a href="pdbeditaccount.html" role="button" class="btn btn-primary">Edit</a></h2>
+                <h3>Account <a href="pdbeditaccount.html" role="button" class="btn btn-primary">Edit</a></h3>
                 <div class="row">
                     <div class="col">
-                        <h3>First Name: Angela</h3>
+                        First Name: Angela
                     </div>
                     <div class="col">
-                        <h3>Last Name: Mercado</h3>
+                        Last Name: Mercado
                     </div>
                 </div>
-                <h3>Email Address: ange@akads.com</h3>
-                <h3>Password: ******</h3>
+                Email Address: ange@akads.com
+                <br>
+                Password: ******
             </div>
 
             <div class="col"id="payment">
-                <h2>Payment Method <a href="editpayment.html" role="button" class="btn btn-primary">Edit</a></h2>
-                <h3>Account Type: BDO Savings</h3>
-                <h3>Account Number: **** **** **** 0123</h3>
+                <h3>Payment Method <a href="editpayment.html" role="button" class="btn btn-primary">Edit</a></h3>
+                Account Type: BDO Savings
+                <br>
+                Account Number: **** **** **** 0123
 
             </div>
 

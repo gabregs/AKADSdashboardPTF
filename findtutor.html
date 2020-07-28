@@ -66,7 +66,7 @@
                   </a>
                   </li>
                   <li class="nav-item">
-                  <a class="nav-link" href="#">
+                  <a class="nav-link" href="pdbsettings.html">
                       <i class="fas fa-cog"></i>
                       Settings
                   </a>
@@ -78,90 +78,105 @@
             <!-- Dashboard -->
             <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
                 <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                    <h1 class="h2">Booking Form</h1>
+                    <h2>Booking Form</h2>
                     <div class="btn-toolbar mb-2 mb-md-0">
                       <button type="button" class="btn btn-lg btn-info"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</button>
                     </div>
                 </div>
                 
                 <form action="" style="padding: 0 10% 5%;">
-                    <div class="student-name form-group">
-                      <label class="form-check-label" for="exampleFormControlInput1">Student's Name</label>
-                      <input type="" class="form-control" id="exampleFormControlInput1" placeholder="Student's Name">
-                    </div>
-                    <div class="row form-group">
-                      <div class="col-lg-2">
-                        <label for="exampleFormControlInput1">Grade Level</label>
-                        <input type="" class="form-control" id="exampleFormControlInput1" placeholder="1-10">
-                      </div>
-                      <div class="col-lg-5">
-                        <label for="exampleFormControlInput1">Subject</label>
-                        <input type="" class="form-control" id="exampleFormControlInput1" placeholder="MATH">
-                      </div>
-                      <div class="col-lg-5">
-                        <label for="exampleFormControlInput1">Topic</label>
-                        <input type="" class="form-control" id="exampleFormControlInput1" placeholder="Multiplication, Divion, etc...">
+                  <div class="row">
+                    <div class="col-lg-7">
+                      <div>
+                        <label class="form-check-label" for="exampleFormControlInput1">Student's Name</label>
+                        <input type="" class="form-control" id="exampleFormControlInput1" placeholder="Student's Name">
                       </div>
                     </div>
-                    <div class="row form-group">
-                      <div class="col-lg-2">
-                        <label for="exampleFormControlInput1">Duration</label>
-                        <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
-                          <option selected>Choose...</option>
-                          <option value="1">1 hour</option>
-                          <option value="2">2 hours</option>
-                          <option value="3">3 hours</option>
-                        </select>
-                      </div>
-                      <div class="col-lg-5">
-                        <label for="exampleFormControlInput1">Date</label>
-                        <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="MATH">
-                      </div>
-                      <div class="col-lg-5">
-                        <label for="exampleFormControlInput1">Time</label>
-                        <input type="time" class="form-control" id="exampleFormControlInput1" placeholder="Multiplication, Divion, etc...">
-                      </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2 form-padtop">
+                      <label for="exampleFormControlInput1">Grade Level</label>
+                      <input type="" class="form-control" id="exampleFormControlInput1" placeholder="Enter Grade Level">
                     </div>
-                    <div class="custom-file form-group">
+                    <div class="col-lg-5 form-padtop">
+                      <label for="exampleFormControlInput1">Subject</label>
+                      <input type="" class="form-control" id="exampleFormControlInput1" placeholder="Enter Subject">
+                    </div>
+                    <div class="col-lg-5 form-padtop">
+                      <label for="exampleFormControlInput1">Topic</label>
+                      <input type="" class="form-control" id="exampleFormControlInput1" placeholder="Enter Topic">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-2 form-padtop">
+                      <label for="exampleFormControlInput1">Duration</label>
+                      <select class="custom-select mr-sm-2" id="inlineFormCustomSelect">
+                        <option selected>Choose...</option>
+                        <option value="1">1 hour</option>
+                        <option value="2">2 hours</option>
+                        <option value="3">3 hours</option>
+                      </select>
+                    </div>
+                    <div class="col-lg-5 form-padtop">
+                      <label for="exampleFormControlInput1">Date</label>
+                      <input type="date" class="form-control" id="exampleFormControlInput1" placeholder="MATH">
+                    </div>
+                    <div class="col-lg-5 form-padtop">
+                      <label for="exampleFormControlInput1">Time</label>
+                      <input type="time" class="form-control" id="exampleFormControlInput1" placeholder="Multiplication, Divion, etc...">
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-7 form-padtop">
                       <label for="exampleFormControlInput1">Upload References</label>
-                      <input type="file" class="custom-file-input" id="customFile">
-                      <label class="custom-file-label" for="customFile">Choose file</label>
-                    </div>
-                    <div class="input-group form-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">Special Requests</span>
+                      <div class="custom-file">
+                        
+                        <input type="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
                       </div>
-                      <textarea class="form-control" aria-label="With textarea"></textarea>
                     </div>
-                    <div>
-                      <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitBooking">Submit</button>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-7 form-padtop">
+                      <label for="exampleFormControlInput1">Special Requests</label>
+                      <div class="input-group">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Request</span>
+                        </div>
+                        <textarea class="form-control" aria-label="With textarea"></textarea>
+                      </div>
                     </div>
-                    <!-- Modal -->
-                    <div class="modal fade" id="submitBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                      <div class="modal-dialog modal-dialog-centered">
-                        <div class="modal-content">
-                          <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Booking Received.</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                              <span aria-hidden="true">&times;</span>
-                            </button>
-                          </div>
-                          <div class="modal-body">
-                            ...
-                            <!-- <p>Your booking has been received.</p>
-                            <p>We will notify you once a tutor has accepted your request.</p>
-                            <p>Thank you for booking with AKADS!</p>
-                            <p>The New Normal for Tutorials.</p> -->
-                          </div>
-                          <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-                          </div>
+                  </div>
+                  
+                  <div class="form-padtop">
+                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#submitBooking"><i class="far fa-check-circle"></i> Submit</button>
+                  </div>
+
+                  <!-- Modal -->
+                  <div class="modal fade" id="submitBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Booking Received.</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          ...
+                          <!-- <p>Your booking has been received.</p>
+                          <p>We will notify you once a tutor has accepted your request.</p>
+                          <p>Thank you for booking with AKADS!</p>
+                          <p>The New Normal for Tutorials.</p> -->
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                          <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
                         </div>
                       </div>
                     </div>
-                    
-                  </form>
+                  </div>
+                </form>
             </main>
 
         </div>
