@@ -126,7 +126,7 @@ body {
   }
 
   /*Settings*/
-    #account, #payment {
-      margin-bottom: 50px;
+    #account, #payment, #pword {
+      margin-bottom: 20px;
     }
   

@@ -215,7 +215,7 @@ h3 {
     text-align: center;
   }
 }
-
+ 
 @media (max-width: 650px) {
   .booking-gform {
     position: relative;
