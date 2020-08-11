@@ -1,0 +1,80 @@
+<!-- Start -->
+<section class="colored-section" id="title">
+    <div class="container-fluid">
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="/images/akadsWeb.png" alt="akadstextlogo" height="50" width="147"></a>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/#aboutus">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#pricing">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#contact">Contact Us</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <a class="akads-dbluetext btn-bn btn btn-light my-2 my-sm-0 mr-1" href="/users/login" role="button"> <b>LOG IN</b></a>
+        </span>
+
+          <span class="navbar-text">
+              <a class="akads-dbluetext btn-bn btn btn-light my-2 my-sm-0" href="/users/regone" role="button"><i class="fas fa-sign-in-alt"></i><b> GET STARTED</b></a>
+          </span>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+
+<!-- Log In -->
+  <section class="colored-section" id="login">
+    <div class="container-fluid container-padbot">
+      <h1 class="login-header">Log In</h1>
+      <%- include('partials/messages'); %>
+      <form action = "/users/login" method="POST">
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <input
+               type="email" 
+               id="email"
+               name="email"
+               class="form-control login-input" 
+               placeholder="Enter Email Address"
+               />
+            </div>
+          </div>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <input 
+              type="password" 
+              id="password"
+              name="password"
+              class="form-control login-input"
+              placeholder="Enter Password"
+              />
+            </div>
+          </div>   
+        </div>
+        <button class="btn btn-primary" button type="login" type="submit">Log In</button>
+      </div>
+    </form>
+  </section>
+
+<!-- Footer -->
+<section class="white-section" id="contact">
+  <div>
+      <hr style="width: 80%;">
+      <p>© AKADS 2020</p>
+  </div>
+</section>

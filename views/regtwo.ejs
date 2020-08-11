@@ -1,0 +1,149 @@
+  <!-- Start Overlay -->
+  <div id="overlay"></div>
+  <!-- End Overlay -->
+
+<!-- Start -->
+  <section class="colored-section" id="title">
+    <div class="container-fluid">
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="/images/akadsWeb.png" alt="akadstextlogo" height="50" width="147"></a>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/#aboutus">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#pricing">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#contact">Contact Us</a>
+            </li>
+          </ul>
+          <span class="navbar-text">
+            <a class="akads-dbluetext btn-bn btn btn-light my-2 my-sm-0 mr-1" href="/users/login" role="button"> <b>LOG IN</b></a>
+        </span>
+
+          <span class="navbar-text">
+              <a class="akads-dbluetext btn-bn btn btn-light my-2 my-sm-0" href="/users/regone" role="button"><i class="fas fa-sign-in-alt"></i><b> GET STARTED</b></a>
+          </span>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+<!-- Account Details -->
+  <section class="colored-section" id="acctdetails">
+    <div class="container-fluid container-padbot">
+      <h1 class="acctdetails-header">Account Details</h1>
+      <%- include('partials/messages'); %>
+      <form action="/users/register" method="POST">
+        <div class="row form-group">
+            <div class="col-lg-6">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              class="form-control"
+              placeholder="Enter Email"
+              value="<%= typeof email != 'undefined' ? email : '' %>"
+            />
+          </div>
+          <small id="emailHelp" class="form-text text-muted">*We'll never share your email with anyone else.</small>
+        </div>
+        <div class="row form-group">
+            <div class="col-lg-6">
+                <input
+                    type="name"
+                    id="fname"
+                    name="fname"
+                    class="form-control"
+                    placeholder="Enter First Name"
+                    value="<%= typeof fname != 'undefined' ? fname : '' %>"
+                />
+            </div>
+            <div class="col-lg-6">
+            <input
+              type="name"
+              id="lname"
+              name="lname"
+              class="form-control"
+              placeholder="Enter Last Name"
+              value="<%= typeof lname != 'undefined' ? lname : '' %>"
+            />
+            </div>
+        </div>
+        <div class="row form-group">
+            <div class="col-lg-6">
+                <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="Create Password"
+                value="<%= typeof password != 'undefined' ? password : '' %>"
+              />
+            </div>
+            <div class="col-lg-6">
+                <input
+                type="password"
+                id="password2"
+                name="password2"
+                class="form-control"
+                placeholder="Confirm Password"
+                value="<%= typeof password2 != 'undefined' ? password2 : '' %>"
+              />
+            </div>
+          </div>   
+        <button type="submit" class="btn btn-primary">Submit </button>
+      </form>
+    </div>
+    </section>
+
+      <!-- uncomment button above when the info should be sent to a database -->
+      <!-- <a class="btn btn-primary"  onmousedown="toggleOverlay()" >Submit</a> 
+      <a class="btn btn-primary"  href="regthree.html" role="button">Submit</a> -->
+
+      <!-- Button trigger modal -->
+      <!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
+        Submit
+      </button>  -->
+
+      <!-- Modal -->
+      <!-- <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section> -->
+
+
+<!-- Start Special Centered Box
+<div id="specialBox">
+  <p>Thank you for applying!</p> 
+  <a class="btn btn-primary"  href="login.html" >Go to Log In</a> 
+</div> -->
+
+<!-- Footer -->
+  <section class="white-section" id="footer">
+    <hr style="width: 80%;">
+    <p>© AKADS 2020</p>
+  </section>
