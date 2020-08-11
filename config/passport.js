@@ -39,7 +39,7 @@ const Tutor = require('../models/Tutor');
                         console.log('Email not registered')
                         return done(null, false, { message: 'That email is not registered ' });
                     }
-                    console.log(user);
+                    // console.log(user);
                     
 
                     //Match password

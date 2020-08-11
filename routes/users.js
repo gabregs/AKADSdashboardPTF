@@ -5,6 +5,7 @@ const passport = require('passport');
 
 // User model
 const User = require('../models/User')
+const Request = require('../models/Request')
 
 // Login Page
 router.get('/login', (req, res) => res.render('login', {link: '/css/styles.css'}));
@@ -87,7 +88,7 @@ router.post('/register', (req, res) => {
 });
 
 // Login Handle
-router.post('/login', (req , res, next ) => { console.log(req.body);
+router.post('/login', (req , res, next ) => { ; //console.log(req.body)
   passport.authenticate('local', {
     successRedirect: '/dashboard',
     failureRedirect: '/users/login',
@@ -101,6 +102,37 @@ router.get('/logout', (req, res) => {
   req.flash('success_msg', 'You are logged out');
   res.redirect('/users/login');
 })
+
+
+// Find Tutor 
+router.get('/findtutor', (req, res) => {
+  res.render('findtutor' , { link: '/css/dashboard.css'});
+});
+
+// Find Tutor Handle
+router.post('/findtutor', (req, res) => {
+  console.log(req.session.passport.user);
+
+  const { student_name, grade_level, subject, topic, session_duration, tutorial_date, tutorial_time, special_requests } = req.body;
+
+  const newRequest = new Request({
+    parent_email: req.session.passport.user,
+    student_name,
+    grade_level, 
+    subject, 
+    topic, 
+    session_duration, 
+    tutorial_date, 
+    tutorial_time, 
+    special_requests,
+    is_taken: 1 // Default true, will change after tutor dashboard
+});
+  newRequest.save()
+  .then(request => {
+    res.redirect('/dashboard');
+  }) 
+  .catch(err => console.log(err));
+});
 
 
 module.exports = router;
