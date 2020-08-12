@@ -17,5 +17,11 @@ router.get('/dashboard', ensureAuthenticated ,  (req, res) => //ensureAuthentica
         link: '/css/dashboard.css'
     })); 
 
+// Tutor Dashboard
+router.get('/tutordashboard', ensureAuthenticated, (req, res) =>
+    res.render('tutordashboard', {
+        name: req.user.fname,
+        link: '/css/dashboard.css'
+    }));
 
 module.exports = router; 
