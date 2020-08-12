@@ -4,14 +4,25 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 // User model
-const User = require('../models/User')
-const Request = require('../models/Request')
+const User = require('../models/User');
+const Request = require('../models/Request');
+const Tutor = require('../models/Tutor');
+const Session = require('../models/Session');
 
-// Login Page
+// Login Parent Page
 router.get('/login', (req, res) => res.render('login', {link: '/css/styles.css'}));
+
+// Login Tutor Page
+router.get('/tutorlogin', (req, res) => res.render('tutorlogin', {link: '/css/styles.css'}));
 
 // Register Page
 router.get('/regone', (req, res) => res.render('regone', {link: '/css/styles.css'} ));
+
+//Register Tutor
+router.get('/tutorappone', (req, res) => res.render('tutorappone', {link: '/css/styles.css'} ));
+
+//Register Tutor Submitted
+router.get('/tutorapptwo', (req, res) => res.render('tutorapptwo', {link: '/css/styles.css'} ));
 
 //Register Parent
 router.get('/regtwo', (req, res) => res.render('regtwo', {link: '/css/styles.css'}))
@@ -87,11 +98,106 @@ router.post('/register', (req, res) => {
     }
 });
 
-// Login Handle
-router.post('/login', (req , res, next ) => { ; //console.log(req.body)
-  passport.authenticate('local', {
+// Register Tutor Handle
+router.post('/tutorapp', (req, res) => {
+  console.log(req.body);
+  const { fname, lname, password, password2, email, subject, tutor_experience, gov_id, transcript } = req.body;
+
+  let errors = [];
+
+  //Check required fields
+  if (!email ||!fname || !lname || !password || !password2 ||!subject || !tutor_experience || !gov_id || !transcript ) {
+      errors.push({ msg: 'Please enter all fields' });
+    }
+  
+    if (password != password2) {
+      errors.push({ msg: 'Passwords do not match' });
+    }
+  
+    if (password.length < 6) {
+      errors.push({ msg: 'Password must be at least 6 characters' });
+    }
+  
+    if (errors.length > 0) {
+      res.render('tutorappone', {
+        errors,
+        fname,
+        lname,
+        password, 
+        password2, 
+        email, 
+        subject, 
+        tutor_experience, 
+        gov_id, 
+        transcript,
+        link: '/css/styles.css'
+      });
+  } else {
+      // Validation passed
+      Tutor.findOne({ where: {email: email} })
+          .then(tutor => {
+              if(tutor) {
+                  // Tutor Exists
+                  errors.push({ msg: 'Email is already registered'});
+                  res.render('tutorappone', {
+                    errors,
+                    fname,
+                    lname,
+                    password, 
+                    password2, 
+                    email, 
+                    subject, 
+                    tutor_experience, 
+                    gov_id, 
+                    transcript,
+                    link: '/css/styles.css'
+                    });
+              } else {
+                  const newTutor = new Tutor({
+                    fname,
+                    lname,
+                    password, 
+                    password2, 
+                    email, 
+                    subject, 
+                    tutor_experience, 
+                    gov_id, 
+                    transcript,
+                    isaccepted: 1 //// Default true, will change after tutor dashboard
+                  });
+
+                  //Hash password
+                  bcrypt.genSalt(10, (err,salt) => bcrypt.hash(newTutor.password, salt, (err,hash) => {
+                    if(err) throw err;
+                    //Set password to hashed
+                    newTutor.password = hash;
+                    //Save tutor
+                    newTutor.save()
+                    .then(tutor => {
+                      req.flash('success_msg', 'Account Created! Please check your email to confirm your account.');
+                      res.redirect('/users/tutorapptwo');
+                    }) 
+                    .catch(err => console.log(err));
+                  })) 
+              }
+          });
+  }
+});
+
+// Parent Login Handle
+router.post('/login', (req , res, next ) => { ; console.log(req.body)
+  passport.authenticate('user-local', {
     successRedirect: '/dashboard',
     failureRedirect: '/users/login',
+    failureFlash: true
+  })(req, res, next);
+});
+
+// Tutor Login Handle
+router.post('/tutorlogin', (req , res, next ) => { ; console.log(req.body)
+  passport.authenticate('tutor-local', {
+    successRedirect: '/tutordashboard',
+    failureRedirect: '/users/tutorlogin',
     failureFlash: true
   })(req, res, next);
 });
@@ -136,20 +242,21 @@ router.post('/findtutor', (req, res) => {
 
 //Accept Request
 router.get('/requests', (req, res) => {
-    res.render('requests', { link: '/css/dashboard.css' });
+  res.render('requests', { link: '/css/dashboard.css' });
 });
 
 //Accept Request handle
 router.post('/requests', (req, res) => {
-    Request.findOne({
-        where: {
-            is_taken: true,
-            parent_email: req.session.passport.user
-        }
-    }).then(data => {
-        delete data.request_id;
-        Session.create(data);
-    });
+  Request.findOne({
+      where: {
+          is_taken: true,
+          parent_email: req.session.passport.user
+      }
+  }).then(data => {
+      delete data.request_id;
+      Session.create(data);
+  });
 });
+
 
 module.exports = router;

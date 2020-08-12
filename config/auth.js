@@ -1,5 +1,5 @@
 //Passport middleware for authenticating 
-//Doesn't allow user to enter dashboard if they are not logged in
+//Doesn't allow user to route if they are not logged in
 
 module.exports = {
     ensureAuthenticated: function(req, res, next) {

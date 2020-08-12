@@ -20,11 +20,11 @@ const Tutor = db.define('tutor', {
         type: Sequelize.STRING
     },
 
-    Subject: {
+    subject: {
         type: Sequelize.ENUM('ENG','SCI','MATH','FIL')
     },
 
-    Tutor_experience: {
+    tutor_experience: {
         type: Sequelize.TEXT
     },
     gov_id: {
@@ -35,7 +35,7 @@ const Tutor = db.define('tutor', {
         type: Sequelize.BLOB 
     },
 
-    isAccepted: {
+    isaccepted: {
         type: Sequelize.TINYINT
     }
 }, {

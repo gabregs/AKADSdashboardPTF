@@ -35,14 +35,14 @@
 <!-- Log In -->
   <section class="colored-section" id="login">
     <div class="container-fluid container-padbot">
-      <h1 class="login-header">Parent Log In</h1>
+      <h1 class="login-header">Tutor Log In</h1>
       <div class="group">
-        <a type="button" class="btn btn-lg btn-primary" disabled>Parent</a>
-        <a type="button" class="btn btn-primary btn-lg" href="/users/tutorlogin" >Tutor</a>
+        <a type="button" class="btn btn-lg btn-primary" href="/users/login">Parent</a>
+        <a type="button" class="btn btn-primary btn-lg" disabled>Tutor</a>
       </div>
       <br>
       <%- include('partials/messages'); %>
-      <form action = "/users/login" method="POST">
+      <form action = "/users/tutorlogin" method="POST">
         <div class="form-group">
           <div class="row">
             <div class="col">
