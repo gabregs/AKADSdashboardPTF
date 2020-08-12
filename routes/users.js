@@ -134,5 +134,22 @@ router.post('/findtutor', (req, res) => {
   .catch(err => console.log(err));
 });
 
+//Accept Request
+router.get('/requests', (req, res) => {
+    res.render('requests', { link: '/css/dashboard.css' });
+});
+
+//Accept Request handle
+router.post('/requests', (req, res) => {
+    Request.findOne({
+        where: {
+            is_taken: true,
+            parent_email: req.session.passport.user
+        }
+    }).then(data => {
+        delete data.request_id;
+        Session.create(data);
+    });
+});
 
 module.exports = router;

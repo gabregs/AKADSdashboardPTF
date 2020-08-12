@@ -18,7 +18,7 @@ const Session = db.define('session', {
         type: Sequelize.STRING
     },
 
-    Subject: {
+    subject: {
         type: Sequelize.ENUM('ENG','SCI','MATH','FIL')
     },
 
