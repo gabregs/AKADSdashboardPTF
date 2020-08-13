@@ -242,54 +242,32 @@ router.post('/findtutor', (req, res) => {
 //New Requests for tutor
 router.get('/requests', (req, res) => {
 
-    Tutor.findOne( { where: { email: req.session.passport.user } } )
-  
-   .then(tutor => {
-     if (!tutor) {
-       console.log('Not found');
-     }
-     Request.findAll({
-        where: {
-          is_taken: 0,
-          subject: tutor.subject
-        }
-      })
-    
-      .then(request => {
-
+    Tutor.findOne( { where: { email: req.session.passport.user } } ) 
+    .then(tutor => {
+      if (!tutor) {
+        console.log('Not found');
+      }
+      const filterRequests = Request.findAll({
+          where: {
+            is_taken: 0,
+            subject: tutor.subject
+          },
+            raw:true,
+        }).catch(function(err){
+            console.log(err);
+        });
+      filterRequests.then(function(result) {
         res.render('requests', {
-          request_id,
-          tutor_email,
-          parent_email,
-          subject,
-          tutorial_date,
-          tutorial_time,
-          session_duration,
-          student_name,
-          grade_level,
-          topic,
-          special_requests,
+          requests: result,
           link: '/css/dashboard.css'
         });
+      })
       });
    });
 
-    
-
-
-});
-
 //Accept Request handle
 router.post('/requests', (req, res) => {
-  Request.findOne({
-      where: {
-          is_taken: true,
-          parent_email: req.session.passport.user
-      }
-  }).then(data => {
-      delete data.request_id;
-      Session.create(data);
-  });
+  
 });
 
 
