@@ -100,7 +100,6 @@ router.post('/register', (req, res) => {
 
 // Register Tutor Handle
 router.post('/tutorapp', (req, res) => {
-  console.log(req.body);
   const { fname, lname, password, password2, email, subject, tutor_experience, gov_id, transcript } = req.body;
 
   let errors = [];
@@ -231,7 +230,7 @@ router.post('/findtutor', (req, res) => {
     tutorial_date, 
     tutorial_time, 
     special_requests,
-    is_taken: 1 // Default true, will change after tutor dashboard
+    is_taken: 0 // Default true, will change after tutor dashboard
 });
   newRequest.save()
   .then(request => {
@@ -240,9 +239,44 @@ router.post('/findtutor', (req, res) => {
   .catch(err => console.log(err));
 });
 
-//Accept Request
+//New Requests for tutor
 router.get('/requests', (req, res) => {
-  res.render('requests', { link: '/css/dashboard.css' });
+
+    Tutor.findOne( { where: { email: req.session.passport.user } } )
+  
+   .then(tutor => {
+     if (!tutor) {
+       console.log('Not found');
+     }
+     Request.findAll({
+        where: {
+          is_taken: 0,
+          subject: tutor.subject
+        }
+      })
+    
+      .then(request => {
+
+        res.render('requests', {
+          request_id,
+          tutor_email,
+          parent_email,
+          subject,
+          tutorial_date,
+          tutorial_time,
+          session_duration,
+          student_name,
+          grade_level,
+          topic,
+          special_requests,
+          link: '/css/dashboard.css'
+        });
+      });
+   });
+
+    
+
+
 });
 
 //Accept Request handle
