@@ -260,7 +260,7 @@ router.post('/findtutor', (req, res) => {
 
 //New Requests for tutor
 router.get('/requests', (req, res) => {
-
+    console.log('fish');
     Tutor.findOne( { where: { email: req.session.passport.user } } ) 
     .then(tutor => {
       if (!tutor) {
@@ -285,8 +285,35 @@ router.get('/requests', (req, res) => {
    });
 
 //Accept Request handle
-router.post('/requests', (req, res) => {
+router.post('/acceptrequest', (req, res) => {
+
+  Request.findOne({where: {request_id: req.body.request_id}})
+  .then(request => {
+    
+    if (!request) {
+      throw new Error('No request found')
+    }
   
+    console.log(`retrieved request ${JSON.stringify(request,null,2)}`) 
+  
+    let values = {
+      tutor_email: req.session.passport.user,
+      is_taken: 1
+    }
+    
+    request.update(values).then( updatedRequest => {
+    console.log(`updated request ${JSON.stringify(updatedRequest,null,2)}`);
+    delete request.dataValues.request_id;
+    delete request.dataValues.is_taken;
+    Session.create(request.dataValues);
+    });
+  })
+  .catch((error) => {
+    // do seomthing with the error
+    throw new Error(error)
+  });
+  req.flash('success_msg', 'Session accepted. Please check the dashboard.');
+  res.redirect('/users/requests');
 });
 
 
