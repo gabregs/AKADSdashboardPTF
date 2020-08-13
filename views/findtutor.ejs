@@ -20,13 +20,13 @@
             <div class="sidebar-sticky pt-3">
             <ul class="nav flex-column">
                 <li class="nav-item">
-                <a class="nav-link" href="parentdb.html">
+                <a class="nav-link" href="/dashboard">
                     <i class="fas fa-home"></i>
                     Parent Dashboard <span class="sr-only">(current)</span>
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link active" href="findtutor.html">
+                <a class="nav-link active" href="/users/findtutor">
                     <i class="fas fa-search"></i>
                     Find a Tutor
                 </a>
@@ -34,19 +34,19 @@
                 <li class="nav-item">
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="parentdb.html">
+                <a class="nav-link" href="/dashboard">
                     <i class="fas fa-arrow-up"></i>
                     Upcoming Sessions
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="parentdb.html">
+                <a class="nav-link" href="/dasboard">
                     <i class="fas fa-arrow-down"></i>
                     Past Sessions
                 </a>
                 </li>
                 <li class="nav-item">
-                <a class="nav-link" href="pdbsettings.html">
+                <a class="nav-link" href="">
                     <i class="fas fa-cog"></i>
                     Settings
                 </a>
@@ -63,6 +63,7 @@
                     <button type="button" class="btn btn-lg btn-info"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</button>
                   </div>
               </div>
+              <%- include('partials/messages'); %>
               
               <form action="/users/findtutor" method= "POST" padding: 0 10% 5%;>
                 <div class="row">
@@ -75,6 +76,7 @@
                        name="student_name"
                        id="student_name"
                        placeholder="Enter Student's Name"
+                       value="<%= typeof student_name != 'undefined' ? student_name : '' %>"
                        />
                     </div>
                   </div>
@@ -87,6 +89,7 @@
                      class="custom-select mr-sm-2"
                      name="grade_level"
                      id="grade_level"
+                     value="<%= typeof grade_level != 'undefined' ? grade_level : '' %>"
                     >
                     <option selected>Choose...</option>
                     <% let options = []; %>
@@ -102,6 +105,7 @@
                     class="custom-select mr-sm-2"
                     name="subject"
                     id="subject"
+                    value="<%= typeof subject != 'undefined' ? subject : '' %>"
                     >
                      <option selected>Choose...</option>
                      <option value="ENG">English</option>
@@ -118,6 +122,7 @@
                        name="topic"
                        id="topic"
                        placeholder="Enter Topic"
+                       value="<%= typeof topic != 'undefined' ? topic : '' %>"
                        />
                   </div>
                 </div>
@@ -129,6 +134,7 @@
                     class="custom-select mr-sm-2"
                     name="session_duration"
                     id="session_duration"
+                    value="<%= typeof session_duration != 'undefined' ? session_duration : '' %>"
                     >
                       <option selected>Choose...</option>
                       <option value="1">1 hour</option>
@@ -143,6 +149,7 @@
                        class="form-control"
                        name="tutorial_date"
                        id="tutorial_date"
+                       value="<%= typeof tutorial_date != 'undefined' ? tutorial_date : '' %>"
                        />
                   </div>
                   <div class="col-lg-5 form-padtop">
@@ -152,7 +159,9 @@
                     class="form-control" 
                     name="tutorial_time"
                     id="tutorial_time" 
-                    placeholder="Multiplication, Divion, etc...">
+                    placeholder="Multiplication, Divion, etc..."
+                    value="<%= typeof tutorial_time != 'undefined' ? tutorial_time : '' %>"
+                    >
                   </div>
                 </div>
                 <!-- <div class="row">

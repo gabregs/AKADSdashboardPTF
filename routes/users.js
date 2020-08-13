@@ -216,7 +216,6 @@ router.get('/findtutor', (req, res) => {
 
 // Find Tutor Handle
 router.post('/findtutor', (req, res) => {
-  console.log(req.session.passport.user);
 
   const { student_name, grade_level, subject, topic, session_duration, tutorial_date, tutorial_time, special_requests } = req.body;
 
@@ -232,11 +231,31 @@ router.post('/findtutor', (req, res) => {
     special_requests,
     is_taken: 0 // Default true, will change after tutor dashboard
 });
-  newRequest.save()
-  .then(request => {
-    res.redirect('/dashboard');
-  }) 
-  .catch(err => console.log(err));
+
+  let errors = [];
+
+  //Check required fields
+  if (!student_name || !grade_level || !subject || !topic ||!session_duration || !tutorial_date || !tutorial_time ) {
+      errors.push({ msg: 'Please enter all fields' });
+      res.render('findtutor', {
+        errors,
+        student_name,
+        grade_level, 
+        subject, 
+        topic, 
+        session_duration, 
+        tutorial_date, 
+        tutorial_time, 
+        special_requests,
+        link: '/css/dashboard.css'
+    });
+   } else {
+    newRequest.save()
+    .then(request => {
+      res.redirect('/dashboard');
+    }) 
+    .catch(err => console.log(err));
+  }
 });
 
 //New Requests for tutor
