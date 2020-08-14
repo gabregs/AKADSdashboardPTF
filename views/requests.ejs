@@ -94,14 +94,14 @@
                           </button>
                         </div>
                         <div class="modal-body">
-                          <p>Request #: <%= requests[i].request_id %><br></p>
-                          <p>Subject: <%= requests[i].subject %><br></p>
-                          <p>Student Name: <%= requests[i].student_name %><br></p>
-                          <p>Date: <%= requests[i].tutorial_date %><br></p>
-                          <p>Time: <%= requests[i].tutorial_time %><br></p>
-                          <p>Duration: <%= requests[i].session_duration%> Hour/s<br></p>
-                          <p>Topic: <%= requests[i].topic %><br></p>
-                          <p>Special Requests: <%= requests[i].special_requests %></p>
+                          <p><strong>Request #:</strong> <%= requests[i].request_id %><br></p>
+                          <p><strong>Subject:</strong> <%= requests[i].subject %><br></p>
+                          <p><strong>Student Name:</strong> <%= requests[i].student_name %><br></p>
+                          <p><strong>Date:</strong> <%= requests[i].tutorial_date %><br></p>
+                          <p><strong>Time:</strong> <%= requests[i].tutorial_time %><br></p>
+                          <p><strong>Duration:</strong> <%= requests[i].session_duration%> Hour/s<br></p>
+                          <p><strong>Topic:</strong> <%= requests[i].topic %><br></p>
+                          <p><strong>Special Requests: </strong><%= requests[i].special_requests %></p>
                         </div>
                         <div class="modal-footer">
                             <form method="POST" action="/users/acceptrequest">
