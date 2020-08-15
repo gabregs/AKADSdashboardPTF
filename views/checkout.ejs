@@ -1,103 +1,94 @@
 <!-- Navigation Bar -->
 <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"><img src="../images/akadsWhiteWeb.png" alt="akadstextlogo" height="35" width="100"></a>
-    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    
-    <ul class="navbar-nav px-3">
-      <li class="nav-item text-nowrap">
-        <!-- <a class="nav-link" href="#">Sign out</a> -->
-        <a class="btn btn-sm btn-outline-light" href="/users/logout" role="button">Sign Out</a>
-      </li>
-    </ul>
-  </nav>
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="/dashboard"><img src="../images/akadsWhiteWeb.png" alt="akadstextlogo" height="35" width="100"></a>
+  <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <ul class="navbar-nav px-3">
+    <li class="nav-item text-nowrap">
+      <!-- <a class="nav-link" href="#">Sign out</a> -->
+      <a class="btn btn-sm btn-outline-light" href="/users/logout" role="button">Sign Out</a>
+    </li>
+  </ul>
+</nav>
 
 <div class="container-fluid">
-    <div class="row">
-        <!-- Side Navigation Bar -->
-        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
-            <div class="sidebar-sticky pt-3">
-            <ul class="nav flex-column">
-                <li class="nav-item">
-                <a class="nav-link" href="/dashboard">
-                    <i class="fas fa-home"></i>
-                    Parent Dashboard <span class="sr-only">(current)</span>
-                </a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link active" href="/users/findtutor">
-                    <i class="fas fa-search"></i>
-                    Find a Tutor
-                </a>
-                </li>
-                <li class="nav-item">
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/dashboard">
-                    <i class="fas fa-arrow-up"></i>
-                    Upcoming Sessions
-                </a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="/dasboard">
-                    <i class="fas fa-arrow-down"></i>
-                    Past Sessions
-                </a>
-                </li>
-                <li class="nav-item">
-                <a class="nav-link" href="">
-                    <i class="fas fa-cog"></i>
-                    Settings
-                </a>
-                </li>
-            </ul>
-            </div>
-        </nav>
+  <div class="row">
+      <!-- Side Navigation Bar -->
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+          <div class="sidebar-sticky pt-3">
+          <ul class="nav flex-column">
+              <li class="nav-item">
+              <a class="nav-link" href="/dashboard">
+                  <i class="fas fa-home"></i>
+                  Parent Dashboard <span class="sr-only">(current)</span>
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link active" href="/users/findtutor">
+                  <i class="fas fa-search"></i>
+                  Find a Tutor
+              </a>
+              </li>
+              <li class="nav-item">
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="/dashboard">
+                  <i class="fas fa-arrow-up"></i>
+                  Upcoming Sessions
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="/dashboard">
+                  <i class="fas fa-arrow-down"></i>
+                  Past Sessions
+              </a>
+              </li>
+              <li class="nav-item">
+              <a class="nav-link" href="pdbsettings.html">
+                  <i class="fas fa-cog"></i>
+                  Settings
+              </a>
+              </li>
+          </ul>
+          </div>
+      </nav>
 
-          <!-- Dashboard -->
-          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
-              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
-                  <h2>Checkout Form</h2>
-                  <div class="btn-toolbar mb-2 mb-md-0">
-                    <button type="button" class="btn btn-lg btn-info"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</button>
-                  </div>
-              </div>
-              <%- include('partials/messages'); %>
-              
-              <form action="/users/checkout" method= "POST" padding: 0 10% 5%;>
-                <div class="row">
-                  <div class="col-lg-7">
-                    <div>
-                      <label class="form-check-label" for="exampleFormControlInput1">Address Line 1</label>
-                      <input
-                       type="text" 
-                       class="form-control"
-                       name="line1"
-                       id="line1"
-                       placeholder="Enter Address Line 1"
-                       />
-                    </div>
+        <!-- Dashboard -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                <h2>Checkout Form</h2>                
+                <div class="btn-toolbar mb-2 mb-md-0">
+                  <button type="button" class="btn btn-lg btn-info"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</button>
+                </div>
+            </div>
+
+            <img style="margin-bottom: 2%" src="../images/paymongo-logo-green.png" alt="paymongologo" width="15%">
+            <%- include('partials/messages'); %>
+            
+            <form action="" style="padding: 0 2% 2%;">
+              <h3>Billing Address</h3>
+              <div class="row">
+                <div class="col-lg-7">
+                  <div>
+                    <label class="form-check-label" for="exampleFormControlInput1">Address Line 1</label>
+                    <input type="text" class="form-control" id="line1" name="line1" placeholder="Enter Address Line 1">
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-2 form-padtop">
-                    <label for="exampleFormControlInput1">Address Line 2</label>
-                    <input
-                     type="text"
-                     class="form-control"
-                     name="line2"
-                     id="line2"
-                    >
+              </div>
+              <div class="row">
+                <div class="col-lg-7">
+                  <div>
+                    <label class="form-check-label" for="exampleFormControlInput1">Address Line 2</label>
+                    <input type="text" class="form-control" id="line2" name="line2" placeholder="Enter Address Line 2">
                   </div>
-                  <div class="col-lg-5 form-padtop">
-                    <label for="exampleFormControlInput1">City</label>
-                    <select
-                    type="text"
-                    class="custom-select mr-sm-2"
-                    name="city"
-                    id="city"
-                    >
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3 form-padtop">
+                  <label for="exampleFormControlInput1">City</label>
+                  <select type="text" class="form-control custom-select mr-sm-2" id="city" name='city' placeholder="Enter Grade Level">
                     <option value="MM">Paranaque City</option>
                     <option value="MM">Caloocan City</option>
                     <option value="MM">Las Pinas City</option>
@@ -116,151 +107,112 @@
                     <option value="MM">San Juan City</option>
                     <option value="MM">Taguig City</option>
                     <option value="MM">Valenzuela City</option>
-                   </select>
-                  </div>
-                  <div class="col-lg-5 form-padtop">
-                    <label for="exampleFormControlInput1">Province</label>
-                    <select
-                    type="text"
-                    class="custom-select mr-sm-2"
-                    name="state"
-                    id="state"
-                    >
-                    <option value="NCR">Metro Manila</option>
-                  </div>
+                  </select>
                 </div>
-                <div class="row">
-                  <div class="col-lg-2 form-padtop">
+                <div class="col-lg-3 form-padtop">
+                  <label for="exampleFormControlInput1">Province</label>
+                  <select type="text" class="form-control custom-select mr-sm-2" id="state" name='state' placeholder="Enter Grade Level">
+                    <option value="MM">Metro Manila</option>
+                  </select>
+                </div>
+                <div class="col-lg-3 form-padtop">
                     <label for="exampleFormControlInput1">Postal Code</label>
-                    <input
-                       type="text" 
-                       class="form-control"
-                       name="postal_code"
-                       id="postal_code"
-                       />
+                    <input type="" class="form-control" id="postal_code" name="postal_code" placeholder="Enter Postal Code">
                   </div>
-                  <div class="col-lg-5 form-padtop">
-                    <label for="exampleFormControlInput1">Country</label>
+                <div class="col-lg-3 form-padtop">
+                  <label for="exampleFormControlInput1">Country</label>
+                  <select type="text" class="form-control custom-select mr-sm-2" id="country" name='country' placeholder="Enter Grade Level">
+                    <option value="MM">Philippines</option>
+                  </select>
+                </div>
+              </div>
+
+              <h3 style="margin-top: 10px">Payment Details</h3>
+              <div class="row">
+                <div class="col-lg-3 form-padtop">
+                  <label for="exampleFormControlInput1">Credit Card Name</label>
+                  <input type="" class="form-control" id="name" name="name" placeholder="Enter Name">
+                </div>
+                <div class="col-lg-3 form-padtop">
+                  <label for="exampleFormControlInput1">Email</label>
+                  <input type="" class="form-control" id="email" name="email" placeholder="example@email.com">
+                </div>
+                <div class="col-lg-3 form-padtop">
+                  <label for="exampleFormControlInput1">Phone Number</label>
+                  <input type="" class="form-control" id="phone" name="phone" placeholder="+63">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-3">
+                  <div>
+                    <label class="form-check-label" for="exampleFormControlInput1">Credit Card Number</label>
+                    <input type="text" class="form-control" id="card_number" name="card_number" placeholder="XXXX XXXX XXXX XXXX">
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-1">
+                    <label class="form-check-label" for="exampleFormControlInput1">Month</label>
                     <select
-                    type="text"
-                    class="custom-select mr-sm-2"
-                    name="country"
-                    id="country"
-                    >
-                    <option value="PH">Philippines</option>
-                  </div>
-                  <div class="col-lg-5 form-padtop">
-                    <label for="exampleFormControlInput1">Name</label>
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    name="name"
-                    id="name" 
-                    placeholder="Enter Name"
-                    >
+                 type="number"
+                 class="custom-select mr-sm-2"
+                 name="exp_month"
+                 id="exp_month"
+                >
+                <option selected></option>
+                <% for(var i=1; i <= 12; i++) { %>
+                  <option value='<%= i %>'> <%= i %> </option>
+                <% } %>
+                </select>
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-check-label" for="exampleFormControlInput1">Year</label>
+                    <select
+                 type="number"
+                 class="custom-select mr-sm-2"
+                 name="exp_month"
+                 id="exp_month"
+                >
+                <option selected></option>
+                <% for(var i=2020; i <= 2040; i++) { %>
+                  <option value='<%= i %>'> <%= i %> </option>
+                <% } %>
+                </select>
+                </div>
+                <div class="col-lg-1">
+                    <label class="form-check-label" for="exampleFormControlInput1">CV</label>
+                    <input type="text" class="form-control" id="line1" name="line1" placeholder="" maxlength="3">
+                </div>
+              </div>           
+                  <button type="button" class="btn btn-primary form-padtop" data-toggle="modal" data-target="#submitBooking"><i class="far fa-check-circle"></i> Submit</button>
+              </div>
+
+              <!-- Modal -->
+              <div class="modal fade" id="submitBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Booking Received.</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                      ...
+                      <!-- <p>Your booking has been received.</p>
+                      <p>We will notify you once a tutor has accepted your request.</p>
+                      <p>Thank you for booking with AKADS!</p>
+                      <p>The New Normal for Tutorials.</p> -->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                    </div>
                   </div>
                 </div>
-                <div class="row">
-                  <div class="col-lg-7 form-padtop">
-                    <label for="exampleFormControlInput1">Email</label>
-                    <input 
-                    type="text" 
-                    class="form-control" 
-                    name="email"
-                    id="email" 
-                    placeholder="Enter Email"
-                    >
-                  </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-7 form-padtop">
-                      <label for="exampleFormControlInput1">Phone</label>
-                      <input 
-                      type="text" 
-                      class="form-control" 
-                      name="phone"
-                      id="phone" 
-                      placeholder="Enter Phone Number"
-                      >
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-7 form-padtop">
-                      <label for="exampleFormControlInput1">Credit Card Number</label>
-                      <input 
-                      type="text" 
-                      class="form-control" 
-                      name="card_number"
-                      id="card_number" 
-                      placeholder="Enter Credit Card Number"
-                      >
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-7 form-padtop">
-                      <label for="exampleFormControlInput1">Expiration Month</label>
-                      <select
-                     type="number"
-                     class="custom-select mr-sm-2"
-                     name="exp_month"
-                     id="exp_month"
-                    >
-                    <option selected>Choose...</option>
-                    <% for(var i=1; i <= 12; i++) { %>
-                      <option value='<%= i %>'> <%= i %> </option>
-                    <% } %>
-                    </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-7 form-padtop">
-                      <label for="exampleFormControlInput1">Expiration Year</label>
-                      <select
-                     type="number"
-                     class="custom-select mr-sm-2"
-                     name="exp_month"
-                     id="exp_month"
-                    >
-                    <option selected>Choose...</option>
-                    <% for(var i=2020; i <= 2040; i++) { %>
-                      <option value='<%= i %>'> <%= i %> </option>
-                    <% } %>
-                    </select>
-                    </div>
-                  </div>
+              </div>
+            </form>
+        </main>
 
-                <!-- Ghost is_taken -->
-                <!-- <input id="is_taken" name="is_taken" type="number"> -->
-                
-                <div class="form-padtop">
-                  <button type="submit" class="btn btn-primary"><i class="far fa-check-circle"></i> Submit</button>
-                </div>
-
-                <!-- Modal -->
-                <!-- <div class="modal fade" id="submitBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Booking Received.</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body"> -->
-                        <!-- <p>Your booking has been received.</p>
-                        <p>We will notify you once a tutor has accepted your request.</p>
-                        <p>Thank you for booking with AKADS!</p>
-                        <p>The New Normal for Tutorials.</p> -->
-                      <!-- </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
-                      </div>
-                    </div>
-                  </div> -->
-                <!-- </div> -->
-              </form>
-          </main>
-
-      </div>
-  </div>
+    </div>
+</div>
