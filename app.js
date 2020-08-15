@@ -10,7 +10,7 @@ const db = require('./config/database')
 
 //Test DB
 db.authenticate()
-  .then(() => console.log('Database conneceted'))
+  .then(() => console.log('Database connected'))
   .catch(err => console.log('error ' + err ))
 
 const app = express();
