@@ -107,7 +107,7 @@
                           <p><strong>Time:</strong> <%= sessions[i].tutorial_time %><br></p>
                           <p><strong>Duration:</strong> <%= sessions[i].session_duration%> Hour/s<br></p>
                           <p><strong>Topic:</strong> <%= sessions[i].topic %><br></p>
-                          <p><strong>Special sessions: </strong><%= sessions[i].special_sessions %></p>
+                          <p><strong>Special Requests: </strong><%= sessions[i].special_requests %></p>
                         </div>
                         <div class="modal-footer">
                             <form method="POST" action="/users/checkout">
@@ -181,8 +181,8 @@
                         <div class="modal-footer">
                             <form method="POST" action="/users/checkout">
                               <input
-                              id = "request_id"
-                              name ="request_id"
+                              id = "session_id"
+                              name ="session_id"
                               type="hidden"
                               value="<%= sessions[i].session_id  %>"
                               >
@@ -252,7 +252,7 @@
                           <p><strong>Student Name:</strong> <%= sessions[i].student_name %><br></p>
                           <p><strong>Date:</strong> <%= sessions[i].tutorial_date %><br></p>
                           <p><strong>Time:</strong> <%= sessions[i].tutorial_time %><br></p>
-                          <p><strong>Duration:</strong> <%= sessions[i].session_duration%> Hour/s<br></p>
+                          <p><strong>Duration:</strong> <%= sessions[i].session_duration%> hour/s<br></p>
                           <p><strong>Topic:</strong> <%= sessions[i].topic %><br></p>
                           <p><strong>Special sessions: </strong><%= sessions[i].special_sessions %></p>
                         </div>

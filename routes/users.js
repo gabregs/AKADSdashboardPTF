@@ -331,10 +331,17 @@ router.post('/acceptrequest', (req, res) => {
 
 //-----------------------------------Checkout
 router.post('/checkout', (req, res) => {
+    Session.findOne({ where: { session_id: req.body.request_id }})
+        .then(currentSession => {
+            res.render('checkout', { 
+              currentSession : currentSession,
+              link: '/css/dashboard.css' });
+        });
+});
 
-  res.render('checkout' , {link : '/css/dashboard.css' });
-
+//---------------------------------Submit Payment
+router.post('/submitpayment',(req,res)=>{
+    console.log(req.body);
 })
-
 
 module.exports = router;
