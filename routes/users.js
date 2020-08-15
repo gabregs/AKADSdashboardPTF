@@ -315,7 +315,11 @@ router.post('/acceptrequest', (req, res) => {
           await newsession.save();
         })();
 
-      });       
+      }).catch((error) => {
+        throw new Error(error)
+      });;       
+    }).catch((error) => {
+      throw new Error(error)
     });
   })
   .catch((error) => {
@@ -325,12 +329,12 @@ router.post('/acceptrequest', (req, res) => {
   res.redirect('/users/requests');
 });
 
-//-----------------------------------Pay Session
-// router.post('/paysession', (req, res) => {
+//-----------------------------------Checkout
+router.post('/checkout', (req, res) => {
 
-//   Request.findOne({where : {}})
+  res.render('checkout' , {link : '/css/dashboard.css' });
 
-// })
+})
 
 
 module.exports = router;
