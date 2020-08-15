@@ -129,15 +129,12 @@
                 </tbody>
                 </table>
             </div>
-
+            <h3>Upcoming Sessions</h3>
             <% let t %>
             <% for (var i = 0; i < sessions.length ; i++) { %>
             <% if (sessions[i].ispaid = 1) { t++ } %>
             <% } %>
             <% if (t > 0) { %>
-
-            <h3>Upcoming Sessions</h3>
-
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                 <thead>
@@ -203,8 +200,7 @@
                 </table>
             </div>
             <% } else { %>
-              <h3 style=" color: #DB5461"> No Upcoming Sessions </h3>
-              <h5 style="margin-bottom: 20px ; color: #DB5461"> Please pay for any pending payments. </h5>
+              <h5 style=" color: rgba(128, 128, 128, 0.705)"> No Upcoming Sessions <strong style="color: #db54629c; font-size: 80%;">(please pay for any pending payments)</strong></h3>
             <% } %>
 
             <h3>Past Sessions</h3>
