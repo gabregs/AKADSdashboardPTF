@@ -1,4 +1,19 @@
-   <!-- Navigation Bar -->
+ 
+  <!-- Sets minimum request date 2 days from date today -->
+  <% var today = new Date(); %>
+  <% var dd = today.getDate() + 2; %>
+  <% var mm = today.getMonth()+1; //January is 0! %>
+  <% var yyyy = today.getFullYear(); %>
+  <% if(dd<10){ %>
+  <%        dd='0'+dd %>
+  <%   }  %>
+  <%  if(mm<10){ %>
+  <%       mm='0'+mm %>
+  <%   }  %>
+  <% today = yyyy+'-'+mm+'-'+dd; %>
+  
+
+<!-- Navigation Bar -->
    <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"><img src="../images/akadsWhiteWeb.png" alt="akadstextlogo" height="35" width="100"></a>
     <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
@@ -149,6 +164,7 @@
                        class="form-control"
                        name="tutorial_date"
                        id="tutorial_date"
+                       min = "<%= today %>"
                        value="<%= typeof tutorial_date != 'undefined' ? tutorial_date : '' %>"
                        />
                   </div>
@@ -230,3 +246,5 @@
 
       </div>
   </div>
+
+     

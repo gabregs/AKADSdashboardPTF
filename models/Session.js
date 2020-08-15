@@ -61,6 +61,10 @@ const Session = db.define('session', {
 
     isdone: {
         type: Sequelize.TINYINT
+    },
+
+    tutor_name: {
+        type: Sequelize.STRING
     }
 }, {
     timestamps: false

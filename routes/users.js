@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const sequelize = require('sequelize');
 
-// User model
+// All models
 const User = require('../models/User');
 const Request = require('../models/Request');
 const Tutor = require('../models/Tutor');
@@ -229,7 +230,7 @@ router.post('/findtutor', (req, res) => {
     tutorial_date, 
     tutorial_time, 
     special_requests,
-    is_taken: 0 // Default true, will change after tutor dashboard
+    is_taken: 0 
 });
 
   let errors = [];
@@ -258,9 +259,8 @@ router.post('/findtutor', (req, res) => {
   }
 });
 
-//New Requests for tutor
+//------------------------------------------------New Requests for tutor
 router.get('/requests', (req, res) => {
-    console.log('fish');
     Tutor.findOne( { where: { email: req.session.passport.user } } ) 
     .then(tutor => {
       if (!tutor) {
@@ -275,16 +275,17 @@ router.get('/requests', (req, res) => {
         }).catch(function(err){
             console.log(err);
         });
-      filterRequests.then(function(result) {
+      filterRequests.then( (result) => {
         res.render('requests', {
           requests: result,
           link: '/css/dashboard.css'
         });
       })
       });
+      console.log('found requests');
    });
 
-//Accept Request handle
+// ---------------------------------------------------- Accept Request handle
 router.post('/acceptrequest', (req, res) => {
 
   Request.findOne({where: {request_id: req.body.request_id}})
@@ -294,27 +295,42 @@ router.post('/acceptrequest', (req, res) => {
       throw new Error('No request found')
     }
   
-    console.log(`retrieved request ${JSON.stringify(request,null,2)}`) 
+    // console.log(`retrieved request ${JSON.stringify(request,null,2)}`) 
   
     let values = {
       tutor_email: req.session.passport.user,
       is_taken: 1
     }
     
-    request.update(values).then( updatedRequest => {
-    console.log(`updated request ${JSON.stringify(updatedRequest,null,2)}`);
-    delete request.dataValues.request_id;
-    delete request.dataValues.is_taken;
-    Session.create(request.dataValues);
+    request.update(values).then(updatedRequest => {
+    // console.log(`updated request ${JSON.stringify(updatedRequest,null,2)}`);
+      delete request.dataValues.request_id;
+      delete request.dataValues.is_taken;
+      Tutor.findOne({where: {email: req.session.passport.user}, raw: true})
+      .then((result) => {
+        (async () => {
+          const tutorname = `${result.fname} ${result.lname}` ;
+          const newsession = await Session.create(request.dataValues);
+          newsession.tutor_name = tutorname;
+          await newsession.save();
+        })();
+
+      });       
     });
   })
   .catch((error) => {
-    // do seomthing with the error
     throw new Error(error)
   });
   req.flash('success_msg', 'Session accepted. Please check the dashboard.');
   res.redirect('/users/requests');
 });
+
+//-----------------------------------Pay Session
+// router.post('/paysession', (req, res) => {
+
+//   Request.findOne({where : {}})
+
+// })
 
 
 module.exports = router;
