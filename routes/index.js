@@ -32,11 +32,19 @@ router.get('/dashboard', ensureAuthenticated ,  (req, res) => //ensureAuthentica
 
 // Tutor Dashboard
 router.get('/tutordashboard', ensureAuthenticated, (req, res) =>
+Session.findAll({where: {tutor_email: req.user.email} })
+.then(session => {
     res.render('tutordashboard', {
+        sessions: session,
         name: req.user.fname,
         link: '/css/dashboard.css'
-    }));
+    });
+    console.log(session);
+}).catch ((err) => {
+    throw new Error(error);
+})
 
+); 
 
 
 module.exports = router; 

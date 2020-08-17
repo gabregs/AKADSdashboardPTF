@@ -377,45 +377,45 @@ router.post('/checkout', (req, res) => {
 
 //-------------------------------- Checkout get
 
-router.get('/checkout', (request, response) => {
-  response.json('hi'); 
-//   Session.findOne({ where: { session_id: req.body.currentSession.session_id}})
-//         .then(currentSession => {
-//               var request = require("request");
-
-//               var options = {
-//                 method: 'POST',
-//                 url: 'https://api.paymongo.com/v1/payment_intents',
-//                 headers: {
-//                   'content-type': 'application/json',
-//                   authorization: 'Basic c2tfdGVzdF9KdzJHY05kN2l1U3p5VHVOMlZRenF4Vlo6'
-//                 },
-//                 body: {
-//                   data: {
-//                     attributes: {
-//                       amount: currentSession.session_duration * 50000 ,
-//                       payment_method_allowed: ['card'],
-//                       payment_method_options: {card: {request_three_d_secure: 'any'}},
-//                       currency: 'PHP',
-//                       description: 'hatdog',
-//                       statement_descriptor: 'hatdog'
-//                     }
-//                   }
-//                 },
-//                 json: true
-//               };
-              
-//               request(options, function (error, response, body) {
-//                 if (error) throw new Error(error);
-//                 response.json(body);
-//               });     
-//         });
+router.get('/checkout', (req, res) => {
+  console.log(req);
+  // Session.findOne({ where: { session_id: req.body.currentSession.session_id}})
+  //       .then(currentSession => {
+  //         res.render('checkout', {
+  //           currentSession : currentSession,
+  //           link: '/css/dashboard.css' });           
+  //       });
 });
 
 //---------------------------------Submit Payment
 router.post('/submitpayment',(req, res )=>{
-    console.log(req.body);
+  console.log(req.body);  
+  Session.findOne({where: {session_id: req.body.session_id}})
+  .then((session) => {
     
+    if(!session) {
+      throw new Error('No session found')
+    }
+
+    let values = {
+      ispaid: 1
+    }
+
+    session.update(values).then(updatedSession => {
+      res.redirect('/dashboard');
+    });
+
+    // (async () => {
+    //   const newsession = await Session.create(result.dataValues);
+    //   newsession.ispaid = 1;
+    //   await newsession.save();
+
+      
+    // })();
+    
+  }).catch((err) => {
+    throw new error(err);
+  });
 });
 
 

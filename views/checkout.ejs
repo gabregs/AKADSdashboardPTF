@@ -65,7 +65,7 @@
             </div>
             <%- include('partials/messages'); %>
             
-            <form action="/users/submitpayment" method="POST" style="padding: 0 2% 2%;">
+            <form style="padding: 0 2% 2%;">
               <img style="margin-bottom: 2%; margin-top:1%" src="../images/paymongo-logo-green.png" alt="paymongologo" width="15%">
               <h3>Billing Address</h3>
               <div class="row">
@@ -193,7 +193,7 @@
                     <p><strong>Time:</strong> <%= currentSession.tutorial_time %></p>
                     <p><strong>Duration:</strong> <%= currentSession.session_duration%> hour/s</p>
                     <p><strong>Topic:</strong> <%= currentSession.topic %></p>
-                    <p><strong>Special sessions: </strong><%= currentSession.special_requests %></p>
+                    <p><strong>Special Requests: </strong><%= currentSession.special_requests %></p>
                   </div>
                   <div class="col-lg-5">
                     <h3>Cart</h3>
@@ -228,6 +228,39 @@
                 </div>
               </div>
             </form>
+
+            <!-- Pop up for success -->
+            <div class="modal fade" id="modalPaid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Payment Successful!</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <p><strong>Session #:</strong> <%= currentSession.session_id %><br></p>
+                    <p><strong>Tutor:</strong> <%= currentSession.tutor_name %><br></p>
+                    <p><strong>Subject:</strong> <%= currentSession.subject %><br></p>
+                    <p><strong>Student Name:</strong> <%= currentSession.student_name %><br></p>
+                    <p><strong>Date:</strong> <%= currentSession.tutorial_date %><br></p>
+                    <p><strong>Time:</strong> <%= currentSession.tutorial_time %><br></p>
+                    <p><strong>Duration:</strong> <%= currentSession.session_duration%> hour/s<br></p>
+                    <p><strong>Topic:</strong> <%= currentSession.topic %><br></p>
+                    <p><strong>Special Requests: </strong><%= currentSession.special_sessions %></p>
+                  </div>
+                  <div class="modal-footer">
+                      <form method="POST" action="/users/submitpayment">
+                      <input name="session_id" id="session_id" value="<%= currentSession.session_id %>" type="hidden"></input>
+                      <button class="btn btn-secondary" type="submit"> OK </button>
+                    </form>                          
+                  </div>
+                </div>
+              </div>
+          </div>
+
+
         </main>
     </div>
 </div>
@@ -240,85 +273,96 @@
 
     // Create Payment Method
     
-    var data = JSON.stringify({
-        "data": {
-          "attributes": {
-            "details": {
-              "card_number": document.getElementById("card_number").value,
-              "exp_month": parseInt(document.getElementById("exp_month").value),
-              "exp_year": parseInt(document.getElementById("exp_year").value),
-              "cvc": document.getElementById("cvc").value
-            },
-            "billing": {
-              "address": {
-                "line1": document.getElementById("line1").value,
-                "line2": document.getElementById("line2").value,
-                "city": document.getElementById("city").value,
-                "state": "National Capital Region",
-                "postal_code": document.getElementById("postal_code").value,
-                "country": "PH"
+      var data = JSON.stringify({
+          "data": {
+            "attributes": {
+              "details": {
+                "card_number": document.getElementById("card_number").value,
+                "exp_month": parseInt(document.getElementById("exp_month").value),
+                "exp_year": parseInt(document.getElementById("exp_year").value),
+                "cvc": document.getElementById("cvc").value
               },
-              "name": document.getElementById("name").value,
-              "email": document.getElementById("email").value,
-              "phone": document.getElementById("phone").value
-            },
-            "type": "card"
+              "billing": {
+                "address": {
+                  "line1": document.getElementById("line1").value,
+                  "line2": document.getElementById("line2").value,
+                  "city": document.getElementById("city").value,
+                  "state": "National Capital Region",
+                  "postal_code": document.getElementById("postal_code").value,
+                  "country": "PH"
+                },
+                "name": document.getElementById("name").value,
+                "email": document.getElementById("email").value,
+                "phone": document.getElementById("phone").value
+              },
+              "type": "card"
+            }
           }
-        }
-      });
+        });
       
 
       var xhr = new XMLHttpRequest();
       
       xhr.addEventListener("readystatechange", function () {
         if (this.readyState === this.DONE) {
-          const myobj = JSON.parse(this.responseText);
-          console.log(myobj.data.id);
-          // const payMethod = this.response.data.id;
-          // console.log(payMethod);
-
-          // This PaymentMethod ID must be created before the attach action. This is just a sample value to represent a PaymentMethod
-        var paymentMethodId = myobj.data.id ; //from data
-
-        // PaymentIntent client_key example
-        var clientKey = "<%= intentPayment.data.attributes.client_key %>";
-
-        // Get the payment intent id from the client key
-        var paymentIntentId = clientKey.split('_client')[0];
-
-        axios.post(
-        'https://api.paymongo.com/v1/payment_intents/' + paymentIntentId + '/attach',
-        {
-            data: {
-            attributes: {
-                client_key: clientKey,
-                payment_method: paymentMethodId
-            }
-            }
-        },
-        {
-            headers: {
-            // Base64 encoded public PayMongo API key.
-            Authorization: `Basic ${window.btoa("pk_test_e4wyG5SyP5Bh96Fw6948XwBK")}`
-            }
-        }
-        ).then(function(response) {
-        var paymentIntent = response.data.data;
-        var paymentIntentStatus = paymentIntent.attributes.status;
-
-        if (paymentIntentStatus === 'awaiting_next_action') {
-            // render your modal for 3D Secure Authentication since next_action has a value. You can access the next action via paymentIntent.attributes.next_action.
-            console.log('3D authentication required');
-        } else if (paymentIntentStatus === 'succeeded') {
-            // You already received your customer's payment. You can show a success message from this condition.
-            console.log('Payment Successful');
-        } else if(paymentIntentStatus === 'awaiting_payment_method') {
-            // The PaymentIntent encountered a processing error. You can refer to paymentIntent.attributes.last_payment_error to check the error and render the appropriate error message.
-            console.log('Payment Failed');
-          }
-        })
+          console.log(this.responseText);
           
+          if(this.responseText.indexOf("data") > -1) {  
+            const myobj = JSON.parse(this.responseText);
+            
+            // const payMethod = this.response.data.id;
+            // console.log(payMethod);
+
+            // This PaymentMethod ID must be created before the attach action. This is just a sample value to represent a PaymentMethod
+            var paymentMethodId = myobj.data.id ; //from data
+
+            // PaymentIntent client_key example
+            var clientKey = "<%= intentPayment.data.attributes.client_key %>";
+
+            // Get the payment intent id from the client key
+            var paymentIntentId = clientKey.split('_client')[0];
+
+            axios.post(
+            'https://api.paymongo.com/v1/payment_intents/' + paymentIntentId + '/attach',
+            {
+                data: {
+                attributes: {
+                    client_key: clientKey,
+                    payment_method: paymentMethodId
+                }
+                }
+            },
+            {
+                headers: {
+                // Base64 encoded public PayMongo API key.
+                Authorization: `Basic ${window.btoa("pk_test_e4wyG5SyP5Bh96Fw6948XwBK")}`
+                }
+            }
+            ).then(function(response) {
+              var paymentIntent = response.data.data;
+              var paymentIntentStatus = paymentIntent.attributes.status;
+
+              if (paymentIntentStatus === 'awaiting_next_action') {
+                  // render your modal for 3D Secure Authentication since next_action has a value. You can access the next action via paymentIntent.attributes.next_action.
+                  console.log('3D authentication required');
+              } else if (paymentIntentStatus === 'succeeded') {
+                  // You already received your customer's payment. You can show a success message from this condition.
+                  console.log('Payment Successful');
+                  $("#modalPaid").modal()
+              } else if(paymentIntentStatus === 'awaiting_payment_method') {
+                  // The PaymentIntent encountered a processing error. You can refer to paymentIntent.attributes.last_payment_error to check the error and render the appropriate error message.
+                  alert('Payment Failed. Please input fields again.');
+                }
+              }).catch(function(err) {
+                alert(err);
+                location.reload();
+              });
           }
+            else {
+              alert('Error in input fields. Please try again.');
+          }
+        } 
+        
       });
       
       xhr.open("POST", "https://api.paymongo.com/v1/payment_methods");

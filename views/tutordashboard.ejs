@@ -63,108 +63,131 @@
                 </div>
             </div>
             <h3>Upcoming Sessions</h3>
+            <% if (sessions.length > 0) { %>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                 <thead>
                     <tr>
                     <th>Session #</th>
                     <th>Subject</th>
-                    <th>Student</th>
-                    <th>Date</th>
-                    <th>Time</th>
-                    <th>Details</th>
-                    </tr>
-                </thead>
-                <tbody>                  
-                    <tr>
-                    <td>004</td>
-                    <td>MATH</td>
-                    <td>Carl Castillo</td>
-                    <td>07/31/2020</td>
-                    <td>13:00</td>
-                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#startSession">View</button></td>
-                    </tr>
-                </tbody>
-                </table>
-            </div>
-  
-            <h3>Past Sessions</h3>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                <thead>
-                    <tr>
-                    <th>Session #</th>
-                    <th>Subject</th>
-                    <th>Student</th>
+                    <th>Tutor</th>
                     <th>Date</th>
                     <th>Time</th>
                     <th>Details</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                    <td>001</td>
-                    <td>MATH</td>
-                    <td>Carl Castillo</td>
-                    <td>07/28/2020</td>
-                    <td>15:00</td>
-                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
-                    </tr>
-                    <tr>
-                    <td>002</td>
-                    <td>MATH</td>
-                    <td>Carl Castillo</td>
-                    <td>07/29/2020</td>
-                    <td>13:00</td>
-                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
-                    </tr>
-                    <tr>
-                    <td>003</td>
-                    <td>SCIENCE</td>
-                    <td>Alec Cornejo</td>
-                    <td>07/30/2020</td>
-                    <td>15:00</td>
-                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#viewDetails">View</button></td>
-                    </tr>
+                  <% for (var i = 0; i < sessions.length ; i++) { %>
+                  <% if (sessions[i].ispaid == 1) { %>
+                  <tr>
+                    <td><%= sessions[i].session_id %></td>
+                    <td><%= sessions[i].subject %></td>
+                    <td><%= sessions[i].tutor_name %></td>
+                    <td><%= sessions[i].tutorial_date %></td> 
+                    <td><%= sessions[i].tutorial_time %></td>
+                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#session<%= sessions[i].session_id %>">View</button></td>
+                  </tr>
+                  <div class="modal fade" id="session<%= sessions[i].session_id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Session Details</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p><strong>Session #:</strong> <%= sessions[i].session_id %><br></p>
+                          <p><strong>Tutor:</strong> <%= sessions[i].tutor_name %><br></p>
+                          <p><strong>Subject:</strong> <%= sessions[i].subject %><br></p>
+                          <p><strong>Student Name:</strong> <%= sessions[i].student_name %><br></p>
+                          <p><strong>Date:</strong> <%= sessions[i].tutorial_date %><br></p>
+                          <p><strong>Time:</strong> <%= sessions[i].tutorial_time %><br></p>
+                          <p><strong>Duration:</strong> <%= sessions[i].session_duration%> Hour/s<br></p>
+                          <p><strong>Topic:</strong> <%= sessions[i].topic %><br></p>
+                          <p><strong>Special requests: </strong><%= sessions[i].special_requests %></p>
+                        </div>
+                        <div class="modal-footer">
+                              <!-- <button type="button" class="btn btn-danger" data-dismiss="modal">Decline</button> -->
+                              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <% } %>
+                <% } %>
                 </tbody>
                 </table>
             </div>
-  
-            <div class="modal fade" id="startSession" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Session Details</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      ...
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-info" data-dismiss="modal">Start Session</button>
-                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>                          
+            <% } else { %>
+              <h5 style=" color: rgba(128, 128, 128, 0.705)"> No Upcoming Sessions <strong style="color: #db54629c; font-size: 80%;">(please pay for any pending payments)</strong></h3>
+            <% } %>
+
+            <h3>Past Sessions</h3>
+
+            <% let u = 0 %>
+            <% for (var i = 0; i < sessions.length ; i++) { %>
+            <% if (sessions[i].isdone = 1) { u++ } %>
+            <% } %>
+            <% if (u > 0) { %>
+
+
+
+            <div class="table-responsive">
+                <table class="table table-striped table-sm">
+                <thead>
+                    <tr>
+                    <th>Session #</th>
+                    <th>Subject</th>
+                    <th>Tutor</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Details</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <% for (var i = 0; i < sessions.length ; i++) { %>
+                  <% if (sessions[i].ispaid == 1) { %>
+                  <tr>
+                    <td><%= sessions[i].session_id %></td>
+                    <td><%= sessions[i].subject %></td>
+                    <td><%= sessions[i].tutor_name %></td>
+                    <td><%= sessions[i].tutorial_date %></td> 
+                    <td><%= sessions[i].tutorial_time %></td>
+                    <td><button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#session<%= sessions[i].session_id %>">View</button></td>
+                  </tr>
+                  <div class="modal fade" id="session<%= sessions[i].session_id %>" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Session Details</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                          <p><strong>Session #:</strong> <%= sessions[i].session_id %><br></p>
+                          <p><strong>Tutor:</strong> <%= sessions[i].tutor_name %><br></p>
+                          <p><strong>Subject:</strong> <%= sessions[i].subject %><br></p>
+                          <p><strong>Student Name:</strong> <%= sessions[i].student_name %><br></p>
+                          <p><strong>Date:</strong> <%= sessions[i].tutorial_date %><br></p>
+                          <p><strong>Time:</strong> <%= sessions[i].tutorial_time %><br></p>
+                          <p><strong>Duration:</strong> <%= sessions[i].session_duration%> hour/s<br></p>
+                          <p><strong>Topic:</strong> <%= sessions[i].topic %><br></p>
+                          <p><strong>Special Requests: </strong><%= sessions[i].special_requests %></p>
+                        </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        </div>
+                      </div>
                     </div>
                   </div>
-                </div>
+                  <% } %>
+                <% } %>
+                </tbody>
+                </table>
             </div>
-            <div class="modal fade" id="viewDetails" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h5 class="modal-title" id="exampleModalLabel">Session Details</h5>
-                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                      </button>
-                    </div>
-                    <div class="modal-body">
-                      ...
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                    </div>
-                  </div>
-                </div>
-            </div>
+            <% } else { %>
+              <h5 style="color: rgba(128, 128, 128, 0.705)">No Past Sessions</h5>
+              <% } %>
         </main>
