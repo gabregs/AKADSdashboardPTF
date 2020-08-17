@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const flash = require('connect-flash');
 const session = require('express-session');
 const passport = require('passport');
+const axios = require('axios').default;
 
 // Database
 const db = require('./config/database')
