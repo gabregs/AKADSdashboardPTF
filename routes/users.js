@@ -330,7 +330,7 @@ router.post('/acceptrequest', (req, res) => {
 
       }).catch((error) => {
         throw new Error(error)
-      });;       
+      });      
     }).catch((error) => {
       throw new Error(error)
     });
@@ -390,7 +390,7 @@ router.post('/checkout', (req, res) => {
 //-------------------------------- Checkout get
 
 router.get('/checkout', (req, res) => {
-  console.log(req);
+  // console.log(req);
   // Session.findOne({ where: { session_id: req.body.currentSession.session_id}})
   //       .then(currentSession => {
   //         res.render('checkout', {
@@ -401,9 +401,8 @@ router.get('/checkout', (req, res) => {
 
 //---------------------------------Submit Payment
 router.post('/submitpayment',(req, response )=>{
-  console.log(req.body);
+  // console.log(req.body);
   const userid = "sQIhuYNJSLim9GvTyWMB8g";
-
     Session.findOne({where: {session_id: req.body.session_id}})
         .then((session) => {
           
@@ -452,7 +451,7 @@ router.post('/submitpayment',(req, response )=>{
                 "path": "/v2/users/sQIhuYNJSLim9GvTyWMB8g/meetings",
                 "headers": {
                   "content-type": "application/json",
-                  "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInYiOiIyLjAiLCJraWQiOiI2M2VmNjkxYS1kMWIxLTQ0NTktYjNjNC0zMTMwZmFkMjE3ZTcifQ.eyJ2ZXIiOjcsImF1aWQiOiI3NWRmNDhjNDk5MzY0ZWUyYjRiNmU5MWQyYWE4ZjJmZiIsImNvZGUiOiJlNVZWR0NwdGdDX3NRSWh1WU5KU0xpbTlHdlR5V01COGciLCJpc3MiOiJ6bTpjaWQ6VWM0REFON0ZRR09oalYwTHNEMW9lZyIsImdubyI6MCwidHlwZSI6MCwidGlkIjowLCJhdWQiOiJodHRwczovL29hdXRoLnpvb20udXMiLCJ1aWQiOiJzUUlodVlOSlNMaW05R3ZUeVdNQjhnIiwibmJmIjoxNTk3NzQ3Mzg0LCJleHAiOjE1OTc3NTA5ODQsImlhdCI6MTU5Nzc0NzM4NCwiYWlkIjoiQ1lRME03TFZUQk93Qm43bVVwckI2USIsImp0aSI6IjFiYzI1OGRmLTU2NDQtNDQ1My1iYzQ1LTkyOTczNTdlNmM5YiJ9.HU6-97cop0qB71QLhvFTE6mAEra5vkJOnbAH6pHgeenFeEJ3cltrIQAbajYjtLiIfuq4aklj8oD4EBqqDDl1yg"
+                  "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInYiOiIyLjAiLCJraWQiOiJhMjY4MjI5Yy0xMWIyLTRhMTYtYTJmNi0zMDc1ODU4MjZjMjcifQ.eyJ2ZXIiOjcsImF1aWQiOiI3NWRmNDhjNDk5MzY0ZWUyYjRiNmU5MWQyYWE4ZjJmZiIsImNvZGUiOiJlcWJuMnAzN0N6X3NRSWh1WU5KU0xpbTlHdlR5V01COGciLCJpc3MiOiJ6bTpjaWQ6VWM0REFON0ZRR09oalYwTHNEMW9lZyIsImdubyI6MCwidHlwZSI6MCwidGlkIjowLCJhdWQiOiJodHRwczovL29hdXRoLnpvb20udXMiLCJ1aWQiOiJzUUlodVlOSlNMaW05R3ZUeVdNQjhnIiwibmJmIjoxNTk3NzYwNzAwLCJleHAiOjE1OTc3NjQzMDAsImlhdCI6MTU5Nzc2MDcwMCwiYWlkIjoiQ1lRME03TFZUQk93Qm43bVVwckI2USIsImp0aSI6ImY4MzMzZDdkLTQxMjktNGU3ZS1hZjU4LTk5NWQwNDQ0YzdkNiJ9.aEM33r_IQt0XbOIfSTmqoY6LqajnLELs36U0fdE5vBlB8RgfgqFOl_30ZFPYxWDme89x6zGAR6fTd0TVuUQmrQ"
                 }
               };
 
@@ -470,8 +469,8 @@ router.post('/submitpayment',(req, response )=>{
                   const obj = JSON.parse(body.toString());
 
                   let values = {
-                    zoomstart: obj.start_url,
-                    zoomjoin: obj.join_url,
+                    zoomstart: "https://us02web.zoom.us/j/3898887441?pwd=L3kzOXhvVWdneWNwNkJWSk55WUYyUT09",
+                    zoomjoin: "https://us02web.zoom.us/j/3898887441?pwd=L3kzOXhvVWdneWNwNkJWSk55WUYyUT09",
                     ispaid: 1
                   }
 
@@ -490,7 +489,20 @@ router.post('/submitpayment',(req, response )=>{
           });
 });
 
-  
+//---------------------------------Finish Session
+router.post('/finishSession',(req,res) =>{
+    console.log(req.body);
+    Session.findOne({where: {session_id: req.body.session_id}})
+      .then((session) => {
+        let values ={
+          isdone: 1
+        }
+
+        session.update(values).then(updatedSession =>{
+            res.redirect(`${session.zoomstart}`);
+        })
+      });
+});
   
 
 module.exports = router;
