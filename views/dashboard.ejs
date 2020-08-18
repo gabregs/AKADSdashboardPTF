@@ -86,7 +86,7 @@
                 </thead>
                 <tbody>
                   <% for (var i = 0; i < sessions.length ; i++) { %>
-                    <% if(ispaid == null) { %> 
+                    <% if(sessions[i].ispaid == null) { %> 
                   <tr>
                     <td><%= sessions[i].session_id %></td>
                     <td><%= sessions[i].subject %></td>

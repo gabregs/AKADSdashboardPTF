@@ -51,8 +51,12 @@ const Session = db.define('session', {
         type: Sequelize.TEXT
     },
 
-    zoomlink: {
+    zoomjoin: {
         type: Sequelize.STRING
+    },
+
+    zoomstart: {
+        type: Sequelize.TEXT
     },
 
     ispaid: {

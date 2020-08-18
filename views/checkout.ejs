@@ -349,6 +349,7 @@
                   // You already received your customer's payment. You can show a success message from this condition.
                   console.log('Payment Successful');
                   $("#modalPaid").modal()
+                  
               } else if(paymentIntentStatus === 'awaiting_payment_method') {
                   // The PaymentIntent encountered a processing error. You can refer to paymentIntent.attributes.last_payment_error to check the error and render the appropriate error message.
                   alert('Payment Failed. Please input fields again.');

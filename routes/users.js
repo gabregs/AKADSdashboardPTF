@@ -1,8 +1,19 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 const sequelize = require('sequelize');
+const thenrequest = require('then-request');
+const path = require('path');
+const async = require('async');
+const jwt = require('jsonwebtoken');
+const config = require('../config');
+
+
+//ZOOM API KEYS
+var zoom_key = config.APIKey;
+var zoom_sec = config.APISecret;
 
 // All models
 const User = require('../models/User');
@@ -10,6 +21,7 @@ const Request = require('../models/Request');
 const Tutor = require('../models/Tutor');
 const Session = require('../models/Session');
 const { response } = require('express');
+const { getMaxListeners } = require('process');
 
 // Login Parent Page
 router.get('/login', (req, res) => res.render('login', {link: '/css/styles.css'}));
@@ -388,35 +400,97 @@ router.get('/checkout', (req, res) => {
 });
 
 //---------------------------------Submit Payment
-router.post('/submitpayment',(req, res )=>{
-  console.log(req.body);  
-  Session.findOne({where: {session_id: req.body.session_id}})
-  .then((session) => {
-    
-    if(!session) {
-      throw new Error('No session found')
-    }
+router.post('/submitpayment',(req, response )=>{
+  console.log(req.body);
+  const userid = "sQIhuYNJSLim9GvTyWMB8g";
 
-    let values = {
-      ispaid: 1
-    }
+    Session.findOne({where: {session_id: req.body.session_id}})
+        .then((session) => {
+          
+          if(!session) {
+            throw new Error('No session found')
+          }
+          
+          // Create meeting with POST to ZOOM
+          var Moptions = {
+              "topic": session.topic,
+              "type": 1,
+              "start_time": session.tutorial_date.concat(session.tutorial_time),
+              "duration": "",
+              "schedule_for": "",
+              "timezone": "HK",
+              "password": "",
+              "agenda": "",
+              "settings": {
+                "host_video": true,
+                "participant_video": true,
+                "cn_meeting": true,
+                "in_meeting": false,
+                "join_before_host": true,
+                "mute_upon_entry": false,
+                "watermark": true,
+                "use_pmi": false,
+                "approval_type": 0,
+                "registration_type": 1,
+                "audio": "both",
+                "auto_recording": "none",
+                "enforce_login": false,
+                "enforce_login_domains": "",
+                "alternative_hosts": "",
+                "global_dial_in_countries": [                     
+                ],
+                "registrants_email_notification": true
+              }
+          };
+        
+          var http = require("https");
 
-    session.update(values).then(updatedSession => {
-      res.redirect('/dashboard');
-    });
+              var options = {
+                "method": "POST",
+                "hostname": "api.zoom.us",
+                "port": null,
+                "path": "/v2/users/sQIhuYNJSLim9GvTyWMB8g/meetings",
+                "headers": {
+                  "content-type": "application/json",
+                  "authorization": "Bearer eyJhbGciOiJIUzUxMiIsInYiOiIyLjAiLCJraWQiOiI2M2VmNjkxYS1kMWIxLTQ0NTktYjNjNC0zMTMwZmFkMjE3ZTcifQ.eyJ2ZXIiOjcsImF1aWQiOiI3NWRmNDhjNDk5MzY0ZWUyYjRiNmU5MWQyYWE4ZjJmZiIsImNvZGUiOiJlNVZWR0NwdGdDX3NRSWh1WU5KU0xpbTlHdlR5V01COGciLCJpc3MiOiJ6bTpjaWQ6VWM0REFON0ZRR09oalYwTHNEMW9lZyIsImdubyI6MCwidHlwZSI6MCwidGlkIjowLCJhdWQiOiJodHRwczovL29hdXRoLnpvb20udXMiLCJ1aWQiOiJzUUlodVlOSlNMaW05R3ZUeVdNQjhnIiwibmJmIjoxNTk3NzQ3Mzg0LCJleHAiOjE1OTc3NTA5ODQsImlhdCI6MTU5Nzc0NzM4NCwiYWlkIjoiQ1lRME03TFZUQk93Qm43bVVwckI2USIsImp0aSI6IjFiYzI1OGRmLTU2NDQtNDQ1My1iYzQ1LTkyOTczNTdlNmM5YiJ9.HU6-97cop0qB71QLhvFTE6mAEra5vkJOnbAH6pHgeenFeEJ3cltrIQAbajYjtLiIfuq4aklj8oD4EBqqDDl1yg"
+                }
+              };
 
-    // (async () => {
-    //   const newsession = await Session.create(result.dataValues);
-    //   newsession.ispaid = 1;
-    //   await newsession.save();
+              var req = http.request(options, function (res) {
+                var chunks = [];
 
-      
-    // })();
-    
-  }).catch((err) => {
-    throw new error(err);
-  });
+                res.on("data", function (chunk) {
+                  chunks.push(chunk);
+                });
+
+                res.on("end", function () {
+                  var body = Buffer.concat(chunks);
+                  console.log(body.toString());
+
+                  const obj = JSON.parse(body.toString());
+
+                  let values = {
+                    zoomstart: obj.start_url,
+                    zoomjoin: obj.join_url,
+                    ispaid: 1
+                  }
+
+                  session.update(values).then(updatedSession => {
+                    response.redirect('/dashboard');
+                  });
+
+                });
+              });
+
+              req.write(JSON.stringify(Moptions));
+              req.end();
+
+
+
+          });
 });
 
+  
+  
 
 module.exports = router;
