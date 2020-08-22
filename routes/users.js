@@ -198,7 +198,7 @@ router.post('/tutorapp', (req, res) => {
 });
 
 // Parent Login Handle
-router.post('/login', (req , res, next ) => { ; console.log(req.body)
+router.post('/login', (req , res, next ) => { ; 
   passport.authenticate('user-local', {
     successRedirect: '/dashboard',
     failureRedirect: '/users/login',
@@ -207,7 +207,7 @@ router.post('/login', (req , res, next ) => { ; console.log(req.body)
 });
 
 // Tutor Login Handle
-router.post('/tutorlogin', (req , res, next ) => { ; console.log(req.body)
+router.post('/tutorlogin', (req , res, next ) => { ; 
   passport.authenticate('tutor-local', {
     successRedirect: '/tutordashboard',
     failureRedirect: '/users/tutorlogin',
@@ -266,6 +266,7 @@ router.post('/findtutor', (req, res) => {
    } else {
     newRequest.save()
     .then(request => {
+      req.flash('success_msg', 'Your request has been sent. Please wait for us to match you with your tutor.');
       res.redirect('/dashboard');
     }) 
     .catch(err => console.log(err));
@@ -344,8 +345,6 @@ router.post('/acceptrequest', (req, res) => {
 
 //-----------------------------------Checkout
 router.post('/checkout', (req, res) => {
-    
-  console.log('boom!');
 
   Session.findOne({ where: { session_id: req.body.request_id }})
         .then(currentSession => {
@@ -376,7 +375,7 @@ router.post('/checkout', (req, res) => {
               
               request(options, function (error, response, body) {
                 if (error) throw new Error(error);
-                console.log(body);
+                // console.log(body);
                  res.render('checkout', {
                   intentPayment : body,
                   currentSession : currentSession,
@@ -464,7 +463,7 @@ router.post('/submitpayment',(req, response )=>{
 
                 res.on("end", function () {
                   var body = Buffer.concat(chunks);
-                  console.log(body.toString());
+                  // console.log(body.toString());
 
                   const obj = JSON.parse(body.toString());
 
@@ -491,7 +490,7 @@ router.post('/submitpayment',(req, response )=>{
 
 //---------------------------------Finish Session
 router.post('/finishSession',(req,res) =>{
-    console.log(req.body);
+    // console.log(req.body);
     Session.findOne({where: {session_id: req.body.session_id}})
       .then((session) => {
         let values ={

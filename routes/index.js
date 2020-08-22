@@ -23,7 +23,7 @@ router.get('/dashboard', ensureAuthenticated ,  (req, res) => //ensureAuthentica
             name: req.user.fname,
             link: '/css/dashboard.css'
         });
-        console.log(session);
+        // console.log(session);
     }).catch ((err) => {
         throw new Error(error);
     })
@@ -39,7 +39,7 @@ Session.findAll({where: {tutor_email: req.user.email} })
         name: req.user.fname,
         link: '/css/dashboard.css'
     });
-    console.log(session);
+    // console.log(session);
 }).catch ((err) => {
     throw new Error(error);
 })
