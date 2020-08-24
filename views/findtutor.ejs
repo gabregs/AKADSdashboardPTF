@@ -1,0 +1,250 @@
+ 
+  <!-- Sets minimum request date 2 days from date today -->
+  <% var today = new Date(); %>
+  <% var dd = today.getDate() + 2; %>
+  <% var mm = today.getMonth()+1; //January is 0! %>
+  <% var yyyy = today.getFullYear(); %>
+  <% if(dd<10){ %>
+  <%        dd='0'+dd %>
+  <%   }  %>
+  <%  if(mm<10){ %>
+  <%       mm='0'+mm %>
+  <%   }  %>
+  <% today = yyyy+'-'+mm+'-'+dd; %>
+  
+
+<!-- Navigation Bar -->
+   <nav class="navbar navbar-dark sticky-top bg-primary flex-md-nowrap p-0 shadow">
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#"><img src="../images/akadsWhiteWeb.png" alt="akadstextlogo" height="35" width="100"></a>
+    <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+        <!-- <a class="nav-link" href="#">Sign out</a> -->
+        <a class="btn btn-sm btn-outline-light" href="/users/logout" role="button">Sign Out</a>
+      </li>
+    </ul>
+  </nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- Side Navigation Bar -->
+        <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+            <div class="sidebar-sticky pt-3">
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-home"></i>
+                    Parent Dashboard <span class="sr-only">(current)</span>
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link active" href="/users/findtutor">
+                    <i class="fas fa-search"></i>
+                    Find a Tutor
+                </a>
+                </li>
+                <li class="nav-item">
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fas fa-arrow-up"></i>
+                    Upcoming Sessions
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="/dasboard">
+                    <i class="fas fa-arrow-down"></i>
+                    Past Sessions
+                </a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="">
+                    <i class="fas fa-cog"></i>
+                    Settings
+                </a>
+                </li>
+            </ul>
+            </div>
+        </nav>
+
+          <!-- Dashboard -->
+          <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+              <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                  <h2>Booking Form</h2>
+                  <div class="btn-toolbar mb-2 mb-md-0">
+                    <button type="button" class="btn btn-lg btn-info"><i class="far fa-calendar-alt"></i> BOOK A TUTOR</button>
+                  </div>
+              </div>
+              <%- include('partials/messages'); %>
+              
+              <form action="/users/findtutor" method= "POST" padding: 0 10% 5%;>
+                <div class="row">
+                  <div class="col-lg-7">
+                    <div>
+                      <label class="form-check-label" for="exampleFormControlInput1">Student's Name</label>
+                      <input
+                       type="text" 
+                       class="form-control"
+                       name="student_name"
+                       id="student_name"
+                       placeholder="Enter Student's Name"
+                       value="<%= typeof student_name != 'undefined' ? student_name : '' %>"
+                       />
+                    </div>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-2 form-padtop">
+                    <label for="exampleFormControlInput1">Grade Level</label>
+                    <select
+                     type="number"
+                     class="custom-select mr-sm-2"
+                     name="grade_level"
+                     id="grade_level"
+                     value="<%= typeof grade_level != 'undefined' ? grade_level : '' %>"
+                    >
+                    <option selected>Choose...</option>
+                    <% let options = []; %>
+                    <% for(var i=1; i <= 12; i++) { %>
+                      <option value='<%= i %>'> <%= i %> </option>
+                    <% } %>
+                    </select>
+                  </div>
+                  <div class="col-lg-5 form-padtop">
+                    <label for="exampleFormControlInput1">Subject</label>
+                    <select
+                    type="text"
+                    class="custom-select mr-sm-2"
+                    name="subject"
+                    id="subject"
+                    value="<%= typeof subject != 'undefined' ? subject : '' %>"
+                    >
+                     <option selected>Choose...</option>
+                     <option value="ENG">English</option>
+                     <option value="MATH">Math</option>
+                     <option value="FIL">Filipino</option>
+                     <option value="SCI">Science</option>
+                   </select>
+                  </div>
+                  <div class="col-lg-5 form-padtop">
+                    <label for="exampleFormControlInput1">Topic</label>
+                    <input
+                       type="text" 
+                       class="form-control"
+                       name="topic"
+                       id="topic"
+                       placeholder="Enter Topic"
+                       value="<%= typeof topic != 'undefined' ? topic : '' %>"
+                       />
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-lg-2 form-padtop">
+                    <label for="exampleFormControlInput1">Duration</label>
+                    <select
+                    type="number"
+                    class="custom-select mr-sm-2"
+                    name="session_duration"
+                    id="session_duration"
+                    value="<%= typeof session_duration != 'undefined' ? session_duration : '' %>"
+                    >
+                      <option selected>Choose...</option>
+                      <option value="1">1 hour</option>
+                      <option value="2">2 hours</option>
+                      <option value="3">3 hours</option>
+                    </select>
+                  </div>
+                  <div class="col-lg-5 form-padtop">
+                    <label for="exampleFormControlInput1">Date</label>
+                    <input
+                       type="date" 
+                       class="form-control"
+                       name="tutorial_date"
+                       id="tutorial_date"
+                       min = "<%= today %>"
+                       value="<%= typeof tutorial_date != 'undefined' ? tutorial_date : '' %>"
+                       />
+                  </div>
+                  <div class="col-lg-5 form-padtop">
+                    <label for="exampleFormControlInput1">Time</label>
+                    <input 
+                    type="time" 
+                    class="form-control" 
+                    name="tutorial_time"
+                    id="tutorial_time" 
+                    placeholder="Multiplication, Divion, etc..."
+                    value="<%= typeof tutorial_time != 'undefined' ? tutorial_time : '' %>"
+                    >
+                  </div>
+                </div>
+                <!-- <div class="row">
+                  <div class="col-lg-7 form-padtop">
+                    <label for="exampleFormControlInput1">Upload References</label>
+                    <div class="custom-file">
+                      
+                      <input 
+                       type="file"
+                       class="custom-file-input"
+                       name=""
+                       id="customFile">
+                      <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                  </div>
+                </div> -->
+                <div class="row">
+                  <div class="col-lg-7 form-padtop">
+                    <label for="exampleFormControlInput1">Special Requests</label>
+                    <div class="input-group">
+                      <div class="input-group-prepend">
+                        <span class="input-group-text">Request</span>
+                      </div>
+                      <textarea 
+                      class="form-control"
+                      type="text"
+                      id="special_requests"
+                      name="special_requests" 
+                      aria-label="With textarea"></textarea>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Ghost is_taken -->
+                <!-- <input id="is_taken" name="is_taken" type="number"> -->
+                
+                <div class="form-padtop">
+                  <button type="submit" class="btn btn-primary"><i class="far fa-check-circle"></i> Submit</button>
+                </div>
+
+                <!-- Modal -->
+                <!-- <div class="modal fade" id="submitBooking" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Booking Received.</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body"> -->
+                        <!-- <p>Your booking has been received.</p>
+                        <p>We will notify you once a tutor has accepted your request.</p>
+                        <p>Thank you for booking with AKADS!</p>
+                        <p>The New Normal for Tutorials.</p> -->
+                      <!-- </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                      </div>
+                    </div>
+                  </div> -->
+                <!-- </div> -->
+              </form>
+          </main>
+
+      </div>
+  </div>
+
+     

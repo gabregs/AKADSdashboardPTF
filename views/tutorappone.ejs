@@ -1,0 +1,217 @@
+  <!-- Start -->
+  <section class="colored-section" id="title">
+    <div class="container-fluid">
+      <!-- Navigation Bar -->
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <a class="navbar-brand" href="/"><img src="../images/akadsWeb.png" alt="akadstextlogo" height="50" width="147"></a>
+        <div class="collapse navbar-collapse" id="navbarText">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="/#aboutus">About Us</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#pricing">Pricing</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/#contact">Contact Us</a>
+            </li>
+          </ul>
+        <span class="navbar-text">
+            <a class="akads-dbluetext btn-bn btn btn-light my-2 my-sm-0 mr-1" href="/users/login" role="button"> <b>LOG IN</b></a>
+        </span>
+          <span class="navbar-text">
+              <a class="akads-dbluetext btn-bn btn btn-light my-2 my-sm-0" href="/users/regone" role="button"><i class="fas fa-sign-in-alt"></i><b> GET STARTED</b></a>
+        </span>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+<!-- Tutor Application -->
+  <section class="colored-section" id="tutorapp">
+    <div class="container-fluid">
+      <h1 class="tutorapp-header">Tutor Application</h1>
+      <%- include('partials/messages'); %>
+      <form action="/users/tutorapp" method="POST">
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+                <input
+                type="text"
+                id="fname"
+                name="fname"
+                class="form-control"
+                placeholder="Enter First Name"
+                value="<%= typeof fname != 'undefined' ? fname : '' %>"
+              />
+            </div>
+            <div class="col">
+                <input
+                type="text"
+                id="lname"
+                name="lname"
+                class="form-control"
+                placeholder="Enter Last Name"
+                value="<%= typeof lname != 'undefined' ? lname : '' %>"
+              />
+            </div>
+          </div>
+        </div>
+
+        <div class="row form-group">
+            <div class="col-lg-6">
+                <input
+                type="password"
+                id="password"
+                name="password"
+                class="form-control"
+                placeholder="Create Password"
+              />
+            </div>
+            <div class="col-lg-6">
+                <input
+                type="password"
+                id="password2"
+                name="password2"
+                class="form-control"
+                placeholder="Confirm Password"
+              />
+            </div>
+          </div> 
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+              <label for="radio" class="col-2 col-form-label">Sex</label>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineRadio1">
+                <label class="form-check-label" for="inlineRadio1">Male</label>
+              </div>
+              <div class="form-check form-check-inline">
+                <input class="form-check-input" type="radio" id="inlineRadio2">
+                <label class="form-check-label" for="inlineRadio2">Female</label>
+              </div>
+
+            </div>
+            <div class="col">
+              <div class="form-group row">
+                <label for="birthdate" class="col-sm-2 col-form-label">Birthdate</label>
+                <div class="col-sm-10">
+                  <input class="form-control" type="date" value="1999-04-25" id="birthdate">
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <div class="row">
+            <div class="col">
+                <input
+                type="email" 
+                id="email"
+                name="email"
+                class="form-control" 
+                placeholder="Enter Email Address"
+                value="<%= typeof email != 'undefined' ? email : '' %>"
+                />
+            </div>
+            <div class="col">
+              <input type="text" class="form-control" placeholder="Contact Number">
+            </div>
+          </div>
+          <small id="emailHelp" class="form-text text-muted">We'll never share your contact details with anyone else.</small>
+        </div>
+
+        <div class="form-group" id="subjects">
+          <label for="subjects" class="col-4 col-form-label">Subjects You Can Teach</label>
+          <div class="form-check-inline"></div>
+                    <select
+                    type="text"
+                    class="custom-select mr-sm-2"
+                    name="subject"
+                    id="subject"
+                    value="<%= typeof subject != 'undefined' ? subject : '' %>"
+                    />
+                     <option selected>Choose...</option>
+                     <option value="ENG">English</option>
+                     <option value="MATH">Math</option>
+                     <option value="FIL">Filipino</option>
+                     <option value="SCI">Science</option>
+                   </select>
+        </div>
+
+        <div class="form-group">
+          <label for="tutorexperience">How much tutoring experience do you have?</label>
+          <select
+                type="text"
+                class="custom-select mr-sm-2"
+                name="tutor_experience"
+                id="tutor_experience"
+                value="<%= typeof tutor_experience != 'undefined' ? tutor_experience : '' %>"
+          />
+            <option selected>Choose</option>
+            <option value = "Less than 1 year of tutoring experience">Less than 1 year</option>
+            <option value = "1-2 years of tutoring experience">1-2 years</option>
+            <option value= "3-4 years of tutoring experience">3-4 years</option>
+            <option value="5 or more years of tutoring experience">5 years or more</option>
+          </select>
+        </div>
+
+
+        <div class="form-group">
+          <p>Which Grade Levels were the students you taught? Check all that apply</p>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="lowerschool" value="option1">
+            <label class="form-check-label" for="lowerschool">Lower School</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="middleschool" value="option1">
+            <label class="form-check-label" for="middleschool">Middle School</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="jhighschool" value="option1">
+            <label class="form-check-label" for="jhighschool">Junior High School</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="checkbox" id="shighschool" value="option1">
+            <label class="form-check-label" for="shighschool">Senior High School</label>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col">
+            <div class="form-group">
+              <label for="schoolgovtid">Upload School or Government ID</label>
+              <input 
+              type="file" 
+              class="form-control-file" 
+              name="gov_id"
+              id="gov_id">
+            </div>
+          </div>
+          <div class="col">
+            <div class="form-group">
+              <label for="tor">Upload Transcript of Records</label>
+              <input 
+              type="file" 
+              class="form-control-file" 
+              name="transcript"
+              id="transcript">
+            </div>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" >Submit</button>
+      </form>
+    </div>
+  </section>
+
+<!-- Footer -->
+  <section class="white-section" id="footer">
+    <hr style="width: 80%;">
+    <p>© AKADS 2020</p>
+  </section>
