@@ -8,7 +8,7 @@ const Session = require('../models/Session');
 //Landing Page
 router.get('/', forwardAuthenticated, (req, res) => {
     let locals = {
-        link: '/css/styles.css' //links to styles.css
+        link: '/css/styles_landing.css' //links to styles.css
     };
     res.render('index', locals);
 });
