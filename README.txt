@@ -10,5 +10,5 @@ Initialize app:
 node app.js
 
 Create Database: akadsmysql
-Tables: users, sessions, equests, tutors.
+Tables: users, sessions, requests, tutors.
 View models for attributes and columns.
